@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# ATTENTION TO USER: PLEASE MOVE THIS FILE TO /usr/local/bin DIRECTORY FOR USE
-# ALSO RUN: chmod u+x calc IN THAT DIRECTORY TO BE ABLE TO USE IT GLOBALLY
-# (this is so that you can run calc as cli globally across terminal)
-node ~/Documents/Calculatics/dist/index.js $PWD $@
