@@ -1,0 +1,15 @@
+- [x] CLI Argument Parser (for prod.)
+- [x] Testing Library w/ Test Case System (for dev.)
+
+- [/] Lexer/Tokenizer
+	- [x] return statement
+	- [x] number tokens
+	- [ ] strings
+	- [ ] operations
+	- [ ] identifiers
+	- [ ] variables
+	- [ ] functions
+
+- [o] Parser
+	- [ ] abstract syntax tree (AST) structure
+	- [ ] return statement
