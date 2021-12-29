@@ -1,5 +1,6 @@
 {
 	"menu": [
 		"\u001b[33;1mCalculatics\u001b[0m - \u001b[37mProgramming language made by \u001b[36mvamp"
-	]
+	],
+	"error": "\u001b[31;1mERROR\u001b[0m -\u001b[37m {ERROR_MESSAGE} in line {LINE_NUM}, pos {POS_NUM}"
 }
