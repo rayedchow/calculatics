@@ -8,6 +8,6 @@ export const handleError = (errorLog: string, line: number, pos: number) => {
 		.replace(/{POS_NUM}/g, (pos+1).toString());
 
 	console.error(errorMessage);
-	// process.exit();
+	process.exit();
 
 }
