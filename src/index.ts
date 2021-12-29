@@ -1,6 +1,7 @@
 import { Config } from '../@types/Config';
 import ConfigData from '../config.json';
 import readFile from './interpreter/fileReader';
+import { lex } from './interpreter/Lexer';
 
 const CONFIG_OBJ: Config = ConfigData;
 const CLI_ARGS = process.argv.slice(2);
@@ -17,5 +18,6 @@ if(CLI_ARGS[1] == '-f') {
 
 	const fileDir = `${CLI_ARGS[0]}/${CLI_ARGS[2]}`;
 	const fileContent = readFile(fileDir);
-	console.log(fileContent);
+	console.log(lex(fileContent.split('')));
+	// console.log(fileContent);
 }
