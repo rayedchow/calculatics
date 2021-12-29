@@ -62,7 +62,7 @@ export const lex = (charSequence: string[]) => {
 	}
 
 	if(currToken !== '') {
-		handleError('invalid EOF expression', line, pos);
+		handleError('invalid EOF expression', line+1, pos+1);
 	}
 
 	return tokens;
