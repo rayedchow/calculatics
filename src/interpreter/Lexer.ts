@@ -1,11 +1,14 @@
 import { Token, TokenType } from '../../@types/Token';
+import { handleError } from '../errorHandler';
 
 export const lex = (charSequence: string[]) => {
 
 	const tokens: Token[] = [];
 	let currToken = '';
-	let pos = 0;
 	let numToken = '';
+
+	let pos = 0;
+	let line = 0;
 
 	for(const char of charSequence) {
 		currToken += char;
@@ -50,7 +53,16 @@ export const lex = (charSequence: string[]) => {
 			});
 		}
 
+		if(currToken == '\n') {
+			line++;
+			currToken = '';
+		}
+
 		pos++;
+	}
+
+	if(currToken !== '') {
+		handleError('invalid EOF expression', line, pos);
 	}
 
 	return tokens;
