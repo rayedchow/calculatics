@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import { Config } from '../@types/Config';
 import ConfigData from '../config.json';
 
@@ -14,5 +15,13 @@ if(CLI_ARGS.length == 1) {
 if(CLI_ARGS[1] == '-f') {
 	if(CLI_ARGS.length == 2) process.exit();
 
-	console.log(CLI_ARGS[2]);
+	// reading file
+	try {
+		const data = readFileSync(`${CLI_ARGS[0]}/${CLI_ARGS[2]}`, 'utf-8');
+		console.log(data);
+	} catch(err) {
+		console.error(err);
+	}
+
+	console.log(`${CLI_ARGS[0]}/${CLI_ARGS[2]}`);
 }
