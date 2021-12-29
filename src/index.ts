@@ -1,6 +1,4 @@
 // import { handleArgs } from "./argHandler";
-
-import { TokenType } from "../@types/Token";
 import { testLibrary } from "./testHandler";
 
 // PRODUCTION CODE:
@@ -8,9 +6,9 @@ import { testLibrary } from "./testHandler";
 // handleArgs(CLI_ARGS);
 
 // TESTING CODE:
+// - uses testing library to perform
+//	 test cases on .calc files
 testLibrary([
-	[
-		{ type: TokenType.Statement, text: "ret", pos: 0 }
-	],
-	35
+	null,
+	null
 ]);

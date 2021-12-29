@@ -1,6 +1,11 @@
 import { Token, TokenType } from '../../@types/Token';
 import { handleError } from '../errorHandler';
 
+// ---- The Lexer ----
+// The first section of the Calculatics Compiler
+// Loops through characters and creates tokens
+// These tokens are later used to create a tree
+// -- AKA Tokenizer --
 export const lex = (charSequence: string[]) => {
 
 	const tokens: Token[] = [];

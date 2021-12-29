@@ -2,6 +2,7 @@ import { Config } from '../@types/Config';
 import { readFile } from './interpreter/fileReader';
 import { lex } from './interpreter/Lexer';
 
+// made for CLI (prod.)
 export const handleArgs = (args) => {
 	// non-arg CLI menu
 	if(args.length == 1) {
