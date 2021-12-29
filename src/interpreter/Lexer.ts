@@ -25,6 +25,7 @@ export const lex = (charSequence: string[]) => {
 				text: currToken,
 				pos
 			});
+			currToken = '';
 		}
 
 		if(currToken === '->') {
@@ -33,10 +34,20 @@ export const lex = (charSequence: string[]) => {
 				text: currToken,
 				pos
 			});
+			currToken = '';
 		}
 
-		if(Number(currToken) !== NaN) {
+		if((!isNaN(+currToken)) && (currToken !== '')) {
 			numToken += currToken;
+			currToken = '';
+		}
+
+		if((pos+1 === charSequence.length) && (numToken !== '')) {
+			tokens.push({
+				type: TokenType.Number,
+				text: numToken,
+				pos: pos-numToken.length
+			});
 		}
 
 		pos++;

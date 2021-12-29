@@ -6,7 +6,6 @@ export interface Token {
 
 export enum TokenType {
 	Statement,
-	Number,
 	Pointer,
-	EOF
+	Number
 }
