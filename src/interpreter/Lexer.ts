@@ -14,7 +14,7 @@ export const lex = (charSequence: string[]) => {
 	for(const char of charSequence) {
 		currToken += char;
 
-		if((Number(currToken) === NaN) && (numToken !== '')) {
+		if((isNaN(+currToken)) && (numToken !== '')) {
 			tokens.push({
 				type: TokenType.Number,
 				text: numToken,
@@ -46,20 +46,14 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		if((pos+1 === charSequence.length) && (numToken !== '')) {
-			tokens.push({
-				type: TokenType.Number,
-				text: numToken,
-				pos: pos-numToken.length
-			});
-		}
-		// else {
-		// 	console.log(currToken);
-		// }
-
-		if(currToken == '\n') {
+		if(currToken == ';') {
 			line++;
 			linePos = 0;
+			tokens.push({
+				type: TokenType.EOL,
+				text: currToken,
+				pos
+			});
 			currToken = '';
 		}
 
@@ -67,8 +61,8 @@ export const lex = (charSequence: string[]) => {
 		linePos++;
 	}
 
-	if(currToken !== '') {
-		handleError('invalid EOF expression', line, linePos+1);
+	if((currToken !== '') || (numToken !== '')) {
+		handleError('invalid EOF expression', line+1, linePos+1);
 	}
 
 	return tokens;

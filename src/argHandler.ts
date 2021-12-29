@@ -1,5 +1,5 @@
 import { Config } from '../@types/Config';
-import readFile from './interpreter/fileReader';
+import { readFile } from './interpreter/fileReader';
 import { lex } from './interpreter/Lexer';
 
 export const handleArgs = (args) => {
