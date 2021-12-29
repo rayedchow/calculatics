@@ -11,5 +11,5 @@
 	- [ ] functions
 
 - [o] Parser
-	- [ ] abstract syntax tree (AST) structure
+	- [o] abstract syntax tree (AST) structure
 	- [ ] return statement
