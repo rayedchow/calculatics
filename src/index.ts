@@ -1,14 +1,12 @@
 import { Config } from '../@types/Config';
-import ConfigData from '../config.json';
 import readFile from './interpreter/fileReader';
 import { lex } from './interpreter/Lexer';
 
-const CONFIG_OBJ: Config = ConfigData;
 const CLI_ARGS = process.argv.slice(2);
 
 // non-arg CLI menu
 if(CLI_ARGS.length == 1) {
-	console.log(CONFIG_OBJ.menu.join('\n'));
+	console.log(Config.menu.join('\n'));
 	process.exit();
 }
 
