@@ -9,6 +9,7 @@ export const lex = (charSequence: string[]) => {
 
 	let pos = 0;
 	let line = 0;
+	let linePos = 0;
 
 	for(const char of charSequence) {
 		currToken += char;
@@ -52,17 +53,22 @@ export const lex = (charSequence: string[]) => {
 				pos: pos-numToken.length
 			});
 		}
+		// else {
+		// 	console.log(currToken);
+		// }
 
 		if(currToken == '\n') {
 			line++;
+			linePos = 0;
 			currToken = '';
 		}
 
 		pos++;
+		linePos++;
 	}
 
 	if(currToken !== '') {
-		handleError('invalid EOF expression', line+1, pos+1);
+		handleError('invalid EOF expression', line, linePos+1);
 	}
 
 	return tokens;

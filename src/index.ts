@@ -1,23 +1,13 @@
-import { Config } from '../@types/Config';
-import readFile from './interpreter/fileReader';
-import { lex } from './interpreter/Lexer';
+// import { handleArgs } from "./argHandler";
 
-const CLI_ARGS = process.argv.slice(2);
+import { testLibrary } from "./testHandler";
 
-// non-arg CLI menu
-if(CLI_ARGS.length == 1) {
-	console.log(Config.menu.join('\n'));
-	process.exit();
-}
+// PRODUCTION CODE:
+// const CLI_ARGS = process.argv.slice(2);
+// handleArgs(CLI_ARGS);
 
-// parsing file argument
-if(CLI_ARGS[1] == '-f') {
-	if(CLI_ARGS.length == 2) {
-		console.log('No file location provided (provide after -f arg)');
-		process.exit();
-	}
-
-	const fileDir = `${CLI_ARGS[0]}/${CLI_ARGS[2]}`;
-	const fileContent = readFile(fileDir);
-	const tokens = lex(fileContent.split(''));
-}
+// TESTING CODE:
+testLibrary([
+	45,
+	35
+]);
