@@ -40,7 +40,7 @@ export const testLibrary = (test: any[]) => {
 
 const testCase = (caseNum: number) => {
 
-	// reads test case files
+	// reads test case file & compiles
 	const fileDir = `${process.cwd()}/test/case-${caseNum}.calc`;
 	const compileData = compile(fileDir);
 
