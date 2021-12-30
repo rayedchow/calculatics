@@ -11,7 +11,7 @@ export const readFile = (dir: string) => {
 		
 		// removes all commented lines
 		for(const line of data.split('\n')) {
-			if(`${line}`.startsWith('?')) data = data.replace(line, '');
+			if(`${line}`.startsWith('#')) data = data.replace(line, '');
 		}
 
 		// removes all line breaks/whitespace
