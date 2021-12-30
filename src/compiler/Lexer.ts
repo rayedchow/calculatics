@@ -19,7 +19,7 @@ export const lex = (charSequence: string[]) => {
 	for(const char of charSequence) {
 		currToken += char;
 
-		if((isNaN(+currToken)) && (numToken !== '')) {
+		if(((isNaN(+currToken)) && (numToken !== '')) && ((currToken !== 'e') && ((currToken !== '+') && (!numToken.endsWith('e'))) && (currToken !== '.'))) {
 			tokens.push({
 				type: TokenType.Number,
 				text: numToken,
@@ -51,7 +51,12 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		if(currToken == ';') {
+		if(((currToken === 'e') && (numToken !== '')) || ((currToken === '+') && (numToken.endsWith('e')))) {
+			numToken += currToken;
+			currToken = '';
+		}
+
+		if(currToken === ';') {
 			line++;
 			linePos = 0;
 			tokens.push({
