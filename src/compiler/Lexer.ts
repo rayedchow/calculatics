@@ -46,6 +46,7 @@ export const lex = (charSequence: string[]) => {
 		}
 
 		if(currToken === '->') {
+			if((lastToken) && (lastToken.type !== TokenType.Statement)) handleError('invalid pointer token', line+1, linePos+1);
 			lastToken = {
 				type: TokenType.Pointer,
 				text: currToken,
