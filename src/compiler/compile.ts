@@ -21,4 +21,9 @@ export const compile = (fileDir: string) => {
 	// uses the syntax tree to interpret and execute
 	// using the Interpreter compile procedure
 	interpret(SyntaxTree);
+
+	return ({
+		tokens,
+		SyntaxTree
+	});
 }

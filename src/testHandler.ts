@@ -1,7 +1,4 @@
-import { readFile } from "./compiler/fileReader";
-import { interpret } from "./compiler/Interpreter";
-import { lex } from "./compiler/Lexer";
-import { parse } from "./compiler/Parser";
+import { compile } from "./compiler/compile";
 
 // ---- The Calculatics Testing Library ----
 // The testing library is used in development
@@ -44,10 +41,8 @@ export const testLibrary = (test: any[]) => {
 const testCase = (caseNum: number) => {
 
 	// reads test case files
-	const file = readFile(`${process.cwd()}/test/case-${caseNum}.calc`);
-	const tokens = lex(file.split(''));
-	const SyntaxTree = parse(tokens);
-	interpret(SyntaxTree);
+	const fileDir = `${process.cwd()}/test/case-${caseNum}.calc`;
+	const compileData = compile(fileDir);
 
-	return SyntaxTree;
+	return compileData;
 }
