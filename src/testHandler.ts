@@ -1,4 +1,5 @@
 import { readFile } from "./compiler/fileReader";
+import { interpret } from "./compiler/Interpreter";
 import { lex } from "./compiler/Lexer";
 import { parse } from "./compiler/Parser";
 
@@ -46,6 +47,7 @@ const testCase = (caseNum: number) => {
 	const file = readFile(`${process.cwd()}/test/case-${caseNum}.calc`);
 	const tokens = lex(file.split(''));
 	const SyntaxTree = parse(tokens);
+	interpret(SyntaxTree);
 
 	return SyntaxTree;
 }
