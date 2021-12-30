@@ -1,11 +1,17 @@
 // abstract syntax tree
 // formed by parser and used by interpreter
 
-type SyntaxBranch = ReturnStatement;
+type SyntaxBranch = ReturnStatement | VariableStatement;
 
 interface ReturnStatement {
-	value?: number,
+	// type: 'ReturnStatement'
+	value?: number
 	operation?: OperationTree
+}
+
+interface VariableStatement {
+	identifier: string
+	value: number | OperationTree
 }
 
 export interface OperationTree {
