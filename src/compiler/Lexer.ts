@@ -11,6 +11,7 @@ export const lex = (charSequence: string[]) => {
 	const tokens: Token[] = [];
 	let currToken = '';
 	let numToken = '';
+	let lastToken: Token;
 
 	let pos = 0;
 	let line = 0;
@@ -20,29 +21,37 @@ export const lex = (charSequence: string[]) => {
 		currToken += char;
 
 		if(((isNaN(+currToken)) && (numToken !== '')) && ((currToken !== 'e') && ((currToken !== '+') && (!numToken.endsWith('e'))) && (currToken !== '.'))) {
-			tokens.push({
+			lastToken = {
 				type: TokenType.Number,
 				text: numToken,
 				pos: pos-numToken.length
-			});
+			};
+			tokens.push(lastToken);
 			numToken = '';
 		}
 
-		if((currToken === 'ret') || (currToken === 'log')) {
-			tokens.push({
+		if(
+			(currToken === 'ret') ||
+			(currToken === 'log') ||
+			(currToken === 'var')
+		) {
+			if((lastToken) && (lastToken.type !== TokenType.EOL)) handleError('invalid statement token', line+1, linePos+1);
+			lastToken = {
 				type: TokenType.Statement,
 				text: currToken,
 				pos
-			});
+			};
+			tokens.push(lastToken);
 			currToken = '';
 		}
 
 		if(currToken === '->') {
-			tokens.push({
+			lastToken = {
 				type: TokenType.Pointer,
 				text: currToken,
 				pos
-			});
+			};
+			tokens.push(lastToken);
 			currToken = '';
 		}
 
@@ -59,11 +68,12 @@ export const lex = (charSequence: string[]) => {
 		if(currToken === ';') {
 			line++;
 			linePos = 0;
-			tokens.push({
+			lastToken = {
 				type: TokenType.EOL,
 				text: currToken,
 				pos
-			});
+			};
+			tokens.push(lastToken);
 			currToken = '';
 		}
 
