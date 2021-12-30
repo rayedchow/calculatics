@@ -1,4 +1,31 @@
 ret->3;
 
-# COMMENTING
+# -> VARIABLE DECLARING <-
 # var->hello=65;
+# var->hello=(6*5);
+#
+# -> LOGGING <-
+# log->hello;
+# log->(5+3);
+#
+# -> FUNCTION DECLARING <-
+# func->f(p) = 3p;
+# func->f(x:y) = (2x-y);
+#
+# -> RETURNING <-
+# ret->(hello+2);
+# ret->f(hello);
+#
+# -> FUNCTION NESTING <-
+# func->myFunction(x) {
+#	  log->x;
+# 	  ret->(x+2);
+# }
+#
+# -> CONDITIONS <-
+# if->(x>3) => ret->(0);
+# elseif->(x<0) => {
+#	  log->x;
+#	  ret->5;
+# }
+# else => ret->x;
