@@ -7,11 +7,17 @@ export const readFile = (dir: string) => {
 
 	try {
 		// reads file using fs
-		// also removes all whitespace and line breaks
+		// also removes all whitespace
 		const data = readFileSync(dir, 'utf-8')
-			.replace(/\s/g, '')
-			.replace(/(\r\n|\n|\r)/gm, '');
-		return data;
+			.replace(/\s/g, '');
+		
+		// removes all commented lines
+		for(const line of data.split('\n')) {
+			if(line.startsWith('?')) data.replace(line, '');
+		}
+
+		// removes all line breaks and returns
+		return data.replace(/(\r\n|\n|\r)/gm, '');;
 	} catch(err) {
 		handleError('invalid file', -1, -1);
 	}

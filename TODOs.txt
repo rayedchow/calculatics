@@ -10,6 +10,9 @@
 	- [ ] variables
 	- [ ] functions
 
-- [o] Parser
-	- [o] abstract syntax tree (AST) structure
-	- [ ] return statement
+- [x] Parser
+	- [x] abstract syntax tree (AST) structure
+	- [x] ability to parse all token types
+
+- [x] Interpreter
+	- [x] ability to interpret syntax branches
