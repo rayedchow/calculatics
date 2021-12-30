@@ -22,6 +22,9 @@ export const parse = (tokens: Token[]) => {
 				if((token.text === 'ret') && (expStage === 0)) {
 					currBranch.type = 'RETURN_STATEMENT';
 					expStage = 1;
+				} if((token.text === 'log') && (expStage === 0)) {
+					currBranch.type = 'LOG_STATEMENT';
+					expStage = 1;
 				}
 				break;
 			
@@ -30,7 +33,7 @@ export const parse = (tokens: Token[]) => {
 				break;
 			
 			case TokenType.Number:
-				if((expStage === 2) && (currBranch.type === 'RETURN_STATEMENT')) {
+				if((expStage === 2) && ((currBranch.type === 'RETURN_STATEMENT') || (currBranch.type === 'LOG_STATEMENT'))) {
 					expStage = 3;
 					currBranch.value = Number(token.text);
 				}

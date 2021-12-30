@@ -12,8 +12,10 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 			case 'RETURN_STATEMENT':
 				if(branch.value) console.log(branch.value);
-				// process.exit();
 				return;
+			case 'LOG_STATEMENT':
+				if(branch.value) console.log(branch.value);
+				break;
 
 			default:
 				break;

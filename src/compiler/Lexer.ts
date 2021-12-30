@@ -28,7 +28,7 @@ export const lex = (charSequence: string[]) => {
 			numToken = '';
 		}
 
-		if(currToken === 'ret') {
+		if((currToken === 'ret') || (currToken === 'log')) {
 			tokens.push({
 				type: TokenType.Statement,
 				text: currToken,
