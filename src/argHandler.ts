@@ -1,6 +1,6 @@
 import { Config } from '../@types/Config';
-import { readFile } from './interpreter/fileReader';
-import { lex } from './interpreter/Lexer';
+import { readFile } from './compiler/fileReader';
+import { lex } from './compiler/Lexer';
 
 // made for CLI (prod.)
 export const handleArgs = (args) => {

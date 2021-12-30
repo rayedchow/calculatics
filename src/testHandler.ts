@@ -1,6 +1,6 @@
-import { readFile } from "./interpreter/fileReader";
-import { lex } from "./interpreter/Lexer";
-import { parse } from "./interpreter/Parser";
+import { readFile } from "./compiler/fileReader";
+import { lex } from "./compiler/Lexer";
+import { parse } from "./compiler/Parser";
 
 // ---- The Calculatics Testing Library ----
 // The testing library is used in development
