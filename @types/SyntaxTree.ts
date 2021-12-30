@@ -1,16 +1,17 @@
 // abstract syntax tree
 // formed by parser and used by interpreter
 
-type SyntaxBranch = ReturnStatement | VariableStatement;
+export type SyntaxBranch = ReturnStatement | VariableStatement;
 
 interface ReturnStatement {
-	// type: 'ReturnStatement'
+	type?: 'RETURN_STATEMENT'
 	value?: number
 	operation?: OperationTree
 }
 
 interface VariableStatement {
-	identifier: string
+	type?: 'VARIABLE_STATEMENT'
+	identifier?: string
 	value: number | OperationTree
 }
 
@@ -29,8 +30,6 @@ export enum Operator {
 	Multiply,
 	Divide
 }
-
-export const SyntaxTree: SyntaxBranch[] = [];
 
 // example syntax tree:
 // [

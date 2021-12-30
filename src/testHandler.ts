@@ -1,5 +1,6 @@
 import { readFile } from "./interpreter/fileReader";
 import { lex } from "./interpreter/Lexer";
+import { parse } from "./interpreter/Parser";
 
 // ---- The Calculatics Testing Library ----
 // The testing library is used in development
@@ -44,6 +45,7 @@ const testCase = (caseNum: number) => {
 	// reads test case files
 	const file = readFile(`${process.cwd()}/test/case-${caseNum}.calc`);
 	const tokens = lex(file.split(''));
+	const SyntaxTree = parse(tokens);
 
-	return tokens;
+	return SyntaxTree;
 }
