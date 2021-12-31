@@ -26,15 +26,28 @@ export const parse = (tokens: Token[]) => {
 					currBranch.type = 'LOG_STATEMENT';
 				} if(token.text === 'var') {
 					currBranch.type = 'VARIABLE_STATEMENT';
-				} else handleError('invalid statement', line, -1);
+				} else handleError('invalid statement', line+1, -1);
 
 				if(expStage === 0) expStage = 1;
-				else handleError('invalid expression stage', line, -1);
+				else handleError('invalid expression stage', line+1, -1);
+				break;
+			
+			case TokenType.Identifier:
+				if((expStage === 2) && (currBranch.type === 'VARIABLE_STATEMENT')) {
+					expStage = 3;
+					currBranch.identifier = token.text;
+				}
+				else handleError('invalid identifier', line+1, -1);
 				break;
 			
 			case TokenType.Pointer:
 				if(expStage === 1) expStage = 2;
-				else handleError('invalid expression stage', line, -1);
+				else handleError('invalid expression stage (pointer)', line+1, -1);
+				break;
+			
+			case TokenType.Equal:
+				if((expStage === 3) && (currBranch.type === 'VARIABLE_STATEMENT')) expStage = 4;
+				else handleError('invalid expression stage (equal)', line+1, -1);
 				break;
 			
 			case TokenType.Number:
@@ -42,15 +55,21 @@ export const parse = (tokens: Token[]) => {
 					expStage = 3;
 					currBranch.value = Number(token.text);
 				}
-				else handleError('invalid number token', line, -1);
+				if((expStage === 4) && (currBranch.type === 'VARIABLE_STATEMENT')) {
+					expStage = 5;
+					currBranch.value = Number(token.text);
+				}
+				else handleError('invalid number token', line+1, -1);
 				break;
 			
 			case TokenType.EOL:
+				line++;
 				if((currBranch.type) && (currBranch.value)) {
 					syntaxTree.push(currBranch);
 					currBranch = {};
 					expStage = 0;
 				}
+				else handleError('invalid EOL token', line+1, -1);
 				break;
 
 			default:
