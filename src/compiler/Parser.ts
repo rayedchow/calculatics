@@ -1,5 +1,6 @@
 import { SyntaxBranch } from "../../@types/SyntaxTree";
 import { Token, TokenType } from "../../@types/Token";
+import { handleError } from "../errorHandler";
 
 // ---- The Parser ----
 // The second section of the Calculatics Compiler
@@ -10,7 +11,7 @@ export const parse = (tokens: Token[]) => {
 	
 	let expStage = 0;
 	let currBranch: SyntaxBranch = {};
-	// let line = 0;
+	let line = 0;
 
 	const syntaxTree: SyntaxBranch[] = [];
 
@@ -19,17 +20,21 @@ export const parse = (tokens: Token[]) => {
 		switch(token.type) {
 
 			case TokenType.Statement:
-				if((token.text === 'ret') && (expStage === 0)) {
+				if(token.text === 'ret') {
 					currBranch.type = 'RETURN_STATEMENT';
-					expStage = 1;
-				} if((token.text === 'log') && (expStage === 0)) {
+				} if(token.text === 'log') {
 					currBranch.type = 'LOG_STATEMENT';
-					expStage = 1;
-				}
+				} if(token.text === 'var') {
+					currBranch.type = 'VARIABLE_STATEMENT';
+				} else handleError('invalid statement', line, -1);
+
+				if(expStage === 0) expStage = 1;
+				else handleError('invalid expression stage', line, -1);
 				break;
 			
 			case TokenType.Pointer:
 				if(expStage === 1) expStage = 2;
+				else handleError('invalid expression stage', line, -1);
 				break;
 			
 			case TokenType.Number:
@@ -37,6 +42,7 @@ export const parse = (tokens: Token[]) => {
 					expStage = 3;
 					currBranch.value = Number(token.text);
 				}
+				else handleError('invalid number token', line, -1);
 				break;
 			
 			case TokenType.EOL:

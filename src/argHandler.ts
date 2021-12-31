@@ -18,6 +18,6 @@ export const handleArgs = (args: string[]) => {
 
 		// gets file directory and compiles code
 		const fileDir = `${process.cwd()}/${args[1]}`;
-		compile(fileDir);
+		console.log(compile(fileDir));
 	}
 }

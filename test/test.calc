@@ -1,6 +1,5 @@
 log->4;
-log->3.817497318947894e+36;
-log->488;
+var->hello=39;
 ret->3;
 
 # -> VARIABLE DECLARING <-
