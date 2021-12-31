@@ -11,6 +11,7 @@ export const lex = (charSequence: string[]) => {
 	const tokens: Token[] = [];
 	let currToken = '';
 	let numToken = '';
+	let identifierToken = '';
 	let lastToken: Token;
 
 	let pos = 0;
@@ -28,6 +29,16 @@ export const lex = (charSequence: string[]) => {
 			};
 			tokens.push(lastToken);
 			numToken = '';
+		}
+
+		if((identifierToken !== '') && (/[^a-zA-Z]/.test(currToken))) {
+			lastToken = {
+				type: TokenType.Identifier,
+				text: identifierToken,
+				pos: pos-identifierToken.length
+			};
+			tokens.push(lastToken);
+			identifierToken = '';
 		}
 
 		if(
@@ -81,6 +92,11 @@ export const lex = (charSequence: string[]) => {
 				pos
 			};
 			tokens.push(lastToken);
+			currToken = '';
+		}
+
+		else if(lastToken.type === TokenType.Pointer) {
+			identifierToken += currToken;
 			currToken = '';
 		}
 
