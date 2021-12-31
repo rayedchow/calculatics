@@ -61,6 +61,17 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
+		if(currToken === '=') {
+			if((lastToken) && (lastToken.type !== TokenType.Identifier)) handleError('invalid equal token', line+1, linePos+1);
+			lastToken = {
+				type: TokenType.Equal,
+				text: currToken,
+				pos
+			};
+			tokens.push(lastToken);
+			currToken = '';
+		}
+
 		if(currToken === ';') {
 			line++;
 			linePos = 0;
