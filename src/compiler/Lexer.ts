@@ -56,12 +56,7 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		if((!isNaN(+currToken)) && (currToken !== '')) {
-			numToken += currToken;
-			currToken = '';
-		}
-
-		if(((currToken === 'e') && (numToken !== '')) || ((currToken === '+') && (numToken.endsWith('e')))) {
+		if(((!isNaN(+currToken)) && (currToken !== '')) || (((currToken === 'e') && (numToken !== '')) || ((currToken === '+') && (numToken.endsWith('e'))))) {
 			numToken += currToken;
 			currToken = '';
 		}
