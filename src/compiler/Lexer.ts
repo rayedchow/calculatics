@@ -95,7 +95,7 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		else if((lastToken) && (lastToken.type === TokenType.Pointer)) {
+		else if((lastToken) && (lastToken.type === TokenType.Pointer) && (!/[^a-zA-Z]/.test(currToken))) {
 			identifierToken += currToken;
 			currToken = '';
 		}
