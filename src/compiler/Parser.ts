@@ -22,9 +22,9 @@ export const parse = (tokens: Token[]) => {
 			case TokenType.Statement:
 				if(token.text === 'ret') {
 					currBranch.type = 'RETURN_STATEMENT';
-				} if(token.text === 'log') {
+				} else if(token.text === 'log') {
 					currBranch.type = 'LOG_STATEMENT';
-				} if(token.text === 'var') {
+				} else if(token.text === 'var') {
 					currBranch.type = 'VARIABLE_STATEMENT';
 				} else handleError('invalid statement', line+1, -1);
 
@@ -55,7 +55,7 @@ export const parse = (tokens: Token[]) => {
 					expStage = 3;
 					currBranch.value = Number(token.text);
 				}
-				if((expStage === 4) && (currBranch.type === 'VARIABLE_STATEMENT')) {
+				else if((expStage === 4) && (currBranch.type === 'VARIABLE_STATEMENT')) {
 					expStage = 5;
 					currBranch.value = Number(token.text);
 				}

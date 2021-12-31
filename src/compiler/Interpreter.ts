@@ -16,6 +16,9 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 			case 'LOG_STATEMENT':
 				if(branch.value) console.log(branch.value);
 				break;
+			case 'VARIABLE_STATEMENT':
+				if((branch.identifier) && (branch.value)) console.log(`${branch.identifier}=${branch.value}`);
+				break;
 
 			default:
 				break;
