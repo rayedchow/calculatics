@@ -1,3 +1,4 @@
+import { OPERATORS } from '../../@types/SyntaxTree';
 import { Token, TokenType } from '../../@types/Token';
 import { handleError } from '../errorHandler';
 
@@ -76,6 +77,36 @@ export const lex = (charSequence: string[]) => {
 			if((lastToken) && (lastToken.type !== TokenType.Identifier)) handleError('invalid equal token', line+1, linePos+1);
 			lastToken = {
 				type: TokenType.Equal,
+				text: currToken,
+				pos
+			};
+			tokens.push(lastToken);
+			currToken = '';
+		}
+
+		if(currToken === '(') {
+			lastToken = {
+				type: TokenType.OperationStart,
+				text: currToken,
+				pos
+			};
+			tokens.push(lastToken);
+			currToken = '';
+		}
+
+		if(currToken === ')') {
+			lastToken = {
+				type: TokenType.OperationEnd,
+				text: currToken,
+				pos
+			};
+			tokens.push(lastToken);
+			currToken = '';
+		}
+
+		if((OPERATORS.includes(currToken)) && (!numToken.endsWith('e'))) {
+			lastToken = {
+				type: TokenType.Operator,
 				text: currToken,
 				pos
 			};
