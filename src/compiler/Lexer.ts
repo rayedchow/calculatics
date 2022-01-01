@@ -104,7 +104,8 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		if((OPERATORS.includes(currToken)) && (!numToken.endsWith('e'))) {
+		if((lastToken) && (lastToken.type !== TokenType.Statement) &&
+			(OPERATORS.includes(currToken)) && (!numToken.endsWith('e'))) {
 			lastToken = {
 				type: TokenType.Operator,
 				text: currToken,
@@ -136,6 +137,8 @@ export const lex = (charSequence: string[]) => {
 	}
 
 	if((currToken !== '') || (numToken !== '')) {
+		console.log(tokens);
+		console.log(currToken, numToken);
 		handleError('invalid EOF expression', line+1, linePos+1);
 	}
 
