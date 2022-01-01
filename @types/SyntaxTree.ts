@@ -18,13 +18,14 @@ interface BasicStatement {
 	type?: 'RETURN_STATEMENT' | 'LOG_STATEMENT' | 'VARIABLE_STATEMENT'
 	value?: number
 	identifier?: string
-	operation?: OperationTree
+	operation?: Operation
 	line?: number
 }
 
-export interface OperationTree {
-	values?: (number | OperationTree | string)[]
-	operator?: Operator
+type Operation = (number | Operator | Operation | VariableIdentifier)[]
+
+interface VariableIdentifier {
+	identifier: string
 }
 
 export enum Operator {
@@ -50,25 +51,19 @@ export const OPERATORS = [
 // ]
 
 // example operation tree:
-// for operation: (5+39)-(18/m)
-// {
-//		values: [
-//	 		{
-//	 			values: [
-//	 				5,
-//	 				39
-//	 			],
-//	 			operation: 'ADD'
-//	 		},
-//	 		{
-//	 			values: [
-//	 				18,
-//	 				{
-//	 					identifier: 'm'
-//	 				}
-//	 			],
-//	 			operation: 'DIVIDE'
-//	 		}
-//		],
-//		operation: 'SUBTRACT'
+// for operation: 5+(39-18)/m
+// const exampleOperation = {
+// 	type: 'RETURN_STATEMENT',
+// 	operation: [
+// 		5,
+// 		Operator.Add,
+// 		[
+// 			39,
+// 			Operator.Subtract
+// 		],
+// 		Operator.Divide,
+// 		{
+// 			identifier: 'm'
+// 		}
+// 	]
 // }
