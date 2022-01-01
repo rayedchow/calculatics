@@ -1,29 +1,29 @@
 var->hello=-1.3e+58;
 log->hello;
 
-# -> VARIABLE DECLARING <-
+# -> VARIABLE DECLARING <- [x]
 # var->hello=65;
 # var->hello=(6*5);
 #
-# -> LOGGING <-
+# -> LOGGING <- [x]
 # log->hello;
 # log->(5+3);
 #
-# -> FUNCTION DECLARING <-
+# -> FUNCTION DECLARING <- [ ]
 # func->f(p) = 3p;
 # func->f(x:y) = (2x-y);
 #
-# -> RETURNING <-
+# -> RETURNING <- [x]
 # ret->(hello+2);
 # ret->f(hello);
 #
-# -> FUNCTION NESTING <-
+# -> FUNCTION NESTING <- [ ]
 # func->myFunction(x) {
 #	  log->x;
 # 	  ret->(x+2);
 # }
 #
-# -> CONDITIONS <-
+# -> CONDITIONS <- [ ]
 # if->(x>3) => ret->(0);
 # elseif->(x<0) => {
 #	  log->x;

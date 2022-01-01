@@ -10,5 +10,8 @@ export enum TokenType {
 	Pointer,
 	Equal,
 	Number,
+	OperationStart,
+	OperationEnd,
+	Operator,
 	EOL
 }

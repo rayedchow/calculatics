@@ -34,6 +34,13 @@ export enum Operator {
 	Divide
 }
 
+export const OPERATORS = [
+	'+',
+	'-',
+	'*',
+	'/'
+];
+
 // example syntax tree:
 // [
 //	 {
