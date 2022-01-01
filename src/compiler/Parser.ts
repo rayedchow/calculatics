@@ -64,12 +64,12 @@ export const parse = (tokens: Token[]) => {
 			
 			case TokenType.EOL:
 				line++;
-				if((currBranch.type) && (currBranch.value)) {
+				if((currBranch.type) && (currBranch.value || currBranch.identifier || currBranch.operation)) {
 					syntaxTree.push(currBranch);
 					currBranch = {};
 					expStage = 0;
 				}
-				else handleError('invalid EOL token', line+1, -1);
+				else handleError('invalid EOL token', line, -1);
 				break;
 
 			default:

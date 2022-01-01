@@ -27,7 +27,7 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 				break;
 			case 'VARIABLE_STATEMENT':
 				if((branch.identifier) && (branch.value))
-					identifierScope.global[branch.identifier].value = branch.value;
+					identifierScope.global[branch.identifier] = { value: branch.value };
 				break;
 
 			default:
