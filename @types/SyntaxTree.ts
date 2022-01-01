@@ -3,31 +3,41 @@
 
 export type SyntaxBranch = ReturnStatement | VariableStatement | LogStatement;
 
+export interface Scope {
+	global: {
+		[identifier: string]: VariableData
+	}
+	// [scope: string]: string
+}
+
+interface VariableData {
+	value: number
+}
+
 interface ReturnStatement {
 	type?: 'RETURN_STATEMENT'
 	value?: number
 	operation?: OperationTree
+	identifier?: string
 }
 
 interface LogStatement {
 	type?: 'LOG_STATEMENT'
 	value?: number
 	operation?: OperationTree
+	identifier?: string
 }
 
 interface VariableStatement {
 	type?: 'VARIABLE_STATEMENT'
 	identifier?: string
-	value?: number | OperationTree
+	value?: number
+	operation?: OperationTree
 }
 
 export interface OperationTree {
-	values: (number | OperationTree | Identifier)[]
+	values: (number | OperationTree | string)[]
 	operator: Operator
-}
-
-interface Identifier {
-	identifier: string
 }
 
 export enum Operator {
