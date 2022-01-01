@@ -70,6 +70,11 @@ export const parse = (tokens: Token[]) => {
 				else handleError('invalid operation start token', line+1, -1);
 				break;
 			
+			case TokenType.OperationEnd:
+				if((expStage >=3) && (currBranch.type) && (currBranch.operation)) expStage++;
+				else handleError('invalid operation end token', line+1, -1);
+				break;
+			
 			case TokenType.EOL:
 				line++;
 				if((currBranch.type) && (currBranch.value || currBranch.identifier || currBranch.operation)) {
