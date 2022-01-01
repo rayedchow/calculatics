@@ -65,7 +65,7 @@ export const parse = (tokens: Token[]) => {
 			case TokenType.EOL:
 				line++;
 				if((currBranch.type) && (currBranch.value || currBranch.identifier || currBranch.operation)) {
-					syntaxTree.push(currBranch);
+					syntaxTree.push({...currBranch, line});
 					currBranch = {};
 					expStage = 0;
 				}

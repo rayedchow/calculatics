@@ -1,4 +1,5 @@
 import { Scope, SyntaxBranch } from "../../@types/SyntaxTree";
+import { handleError } from "../errorHandler";
 
 const identifierScope: Scope = {
 	global: {}
@@ -12,7 +13,10 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 	const log = (branch: SyntaxBranch) => {
 		if(branch.value) console.log(branch.value);
-		else if(branch.identifier) console.log(identifierScope.global[branch.identifier].value);
+		else if(branch.identifier) {
+			if(!identifierScope.global[branch.identifier]) handleError('invalid log identifier use', branch.line, -1);
+			console.log(identifierScope.global[branch.identifier].value);
+		}
 	}
 
 	for(const branch of syntaxTree) {
