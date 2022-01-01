@@ -1,6 +1,5 @@
-log->hello;
 var->hello=-1.3e+58;
-ret->hello;
+log->hello;
 
 # -> VARIABLE DECLARING <-
 # var->hello=65;
