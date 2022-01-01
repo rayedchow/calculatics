@@ -1,5 +1,4 @@
 var->hello=-1.3e+58;
-32
 log->hello;
 ret->(3+2);
 

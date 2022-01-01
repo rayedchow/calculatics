@@ -59,12 +59,13 @@ export const parse = (tokens: Token[]) => {
 					expStage = 5;
 					currBranch.value = Number(token.text);
 				}
+				else if(currBranch.operation) currBranch.operation.push(Number(token.text));
 				else handleError('invalid number token', line+1, -1);
 				break;
 			
 			case TokenType.OperationStart:
 				if((expStage >= 2) && (currBranch.type)) {
-					currBranch.operation = {};
+					currBranch.operation = [];
 					expStage++;
 				}
 				else handleError('invalid operation start token', line+1, -1);
@@ -73,6 +74,11 @@ export const parse = (tokens: Token[]) => {
 			case TokenType.OperationEnd:
 				if((expStage >=3) && (currBranch.type) && (currBranch.operation)) expStage++;
 				else handleError('invalid operation end token', line+1, -1);
+				break;
+			
+			case TokenType.Operator:
+				if(currBranch.operation) currBranch.operation.push(token.type);
+				else handleError('invalid operator token', line+1, -1);
 				break;
 			
 			case TokenType.EOL:
