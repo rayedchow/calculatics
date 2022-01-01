@@ -1,4 +1,4 @@
-log->-4;
+log->hello;
 var->hello=-1.3e+58;
 ret->hello;
 
