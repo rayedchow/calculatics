@@ -23,8 +23,8 @@ interface BasicStatement {
 }
 
 export interface OperationTree {
-	values: (number | OperationTree | string)[]
-	operator: Operator
+	values?: (number | OperationTree | string)[]
+	operator?: Operator
 }
 
 export enum Operator {
