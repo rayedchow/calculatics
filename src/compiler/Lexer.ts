@@ -47,7 +47,10 @@ export const lex = (charSequence: string[]) => {
 			(currToken === 'log') ||
 			(currToken === 'var')
 		) {
-			if((lastToken) && (lastToken.type !== TokenType.EOL)) handleError('invalid statement token', line+1, linePos+1);
+			if((lastToken) && (lastToken.type !== TokenType.EOL)) {
+				console.log(lastToken);
+				handleError('invalid statement token', line+1, linePos+1);
+			}
 			lastToken = {
 				type: TokenType.Statement,
 				text: currToken,
@@ -105,7 +108,7 @@ export const lex = (charSequence: string[]) => {
 		}
 
 		if((lastToken) && (lastToken.type === TokenType.Number) &&
-			((currToken as Operator) !== null) && (!numToken.endsWith('e'))) {
+			((currToken as Operator) != null) && (!numToken.endsWith('e'))) {
 			lastToken = {
 				type: TokenType.Operator,
 				text: currToken,
