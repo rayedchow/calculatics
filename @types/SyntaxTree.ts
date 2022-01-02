@@ -22,17 +22,10 @@ interface BasicStatement {
 	line?: number
 }
 
-type Operation = (number | Operator | Operation | VariableIdentifier)[]
+type Operation = (number | typeof OPERATORS[number] | VariableIdentifier)[]
 
 interface VariableIdentifier {
 	identifier: string
-}
-
-export enum Operator {
-	Add,
-	Subtract,
-	Multiply,
-	Divide
 }
 
 export const OPERATORS = [
@@ -40,7 +33,7 @@ export const OPERATORS = [
 	'-',
 	'*',
 	'/'
-];
+] as const;
 
 // example syntax tree:
 // [
@@ -56,12 +49,12 @@ export const OPERATORS = [
 // 	type: 'RETURN_STATEMENT',
 // 	operation: [
 // 		5,
-// 		Operator.Add,
+// 		'+',
 // 		[
 // 			39,
-// 			Operator.Subtract
+// 			'-'
 // 		],
-// 		Operator.Divide,
+// 		'/',
 // 		{
 // 			identifier: 'm'
 // 		}

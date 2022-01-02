@@ -77,7 +77,7 @@ export const parse = (tokens: Token[]) => {
 				break;
 			
 			case TokenType.Operator:
-				if(currBranch.operation) currBranch.operation.push(token.type);
+				if(currBranch.operation) currBranch.operation.push(token.type.valueOf());
 				else handleError('invalid operator token', line+1, -1);
 				break;
 			
