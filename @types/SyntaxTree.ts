@@ -22,11 +22,13 @@ interface BasicStatement {
 	line?: number
 }
 
-type Operation = (number | typeof OPERATORS[number] | VariableIdentifier)[]
+type Operation = (number | Operator | VariableIdentifier)[];
 
 interface VariableIdentifier {
 	identifier: string
 }
+
+export type Operator = typeof OPERATORS[number];
 
 export const OPERATORS = [
 	'+',
