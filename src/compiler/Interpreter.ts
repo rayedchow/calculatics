@@ -1,4 +1,4 @@
-import { Scope, SyntaxBranch } from "../../@types/SyntaxTree";
+import { OperationTree, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
 import { handleError } from "../errorHandler";
 
 const identifierScope: Scope = {
@@ -41,5 +41,10 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 		}
 
 	}
+
+}
+
+const parseOperation = (operationTree: OperationTree) => {
+
 
 }

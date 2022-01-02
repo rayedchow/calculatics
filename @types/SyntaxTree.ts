@@ -18,11 +18,11 @@ interface BasicStatement {
 	type?: 'RETURN_STATEMENT' | 'LOG_STATEMENT' | 'VARIABLE_STATEMENT'
 	value?: number
 	identifier?: string
-	operation?: Operation
+	operation?: OperationTree
 	line?: number
 }
 
-type Operation = (number | Operator | VariableIdentifier)[];
+export type OperationTree = (number | Operator | VariableIdentifier | OperationTree)[];
 
 interface VariableIdentifier {
 	identifier: string
