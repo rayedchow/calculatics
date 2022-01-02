@@ -22,7 +22,7 @@ export const lex = (charSequence: string[]) => {
 	for(const char of charSequence) {
 		currToken += char;
 
-		if(((isNaN(+currToken)) && (numToken !== '')) && ((currToken !== 'e') && ((currToken !== '+') && (!numToken.endsWith('e'))) && (currToken !== '.'))) {
+		if(((isNaN(+currToken)) && (numToken !== '')) && ((currToken !== 'e') && ((currToken !== '+') || (!numToken.endsWith('e'))) && (currToken !== '.'))) {
 			lastToken = {
 				type: TokenType.Number,
 				text: numToken,
