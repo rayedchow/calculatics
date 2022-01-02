@@ -1,4 +1,4 @@
-import { SyntaxBranch } from "../../@types/SyntaxTree";
+import { Operator, OPERATORS, SyntaxBranch } from "../../@types/SyntaxTree";
 import { Token, TokenType } from "../../@types/Token";
 import { handleError } from "../errorHandler";
 
@@ -77,7 +77,7 @@ export const parse = (tokens: Token[]) => {
 				break;
 			
 			case TokenType.Operator:
-				if(currBranch.operation) currBranch.operation.push(token.type.valueOf());
+				if((currBranch.operation) && ((token.text as Operator) !== null)) currBranch.operation.push(token.text as Operator);
 				else handleError('invalid operator token', line+1, -1);
 				break;
 			

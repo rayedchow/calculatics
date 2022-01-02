@@ -1,4 +1,4 @@
-import { OPERATORS } from '../../@types/SyntaxTree';
+import { Operator, OPERATORS } from '../../@types/SyntaxTree';
 import { Token, TokenType } from '../../@types/Token';
 import { handleError } from '../errorHandler';
 
@@ -105,7 +105,7 @@ export const lex = (charSequence: string[]) => {
 		}
 
 		if((lastToken) && (lastToken.type === TokenType.Number) &&
-			(OPERATORS.includes(currToken)) && (!numToken.endsWith('e'))) {
+			((currToken as Operator) !== null) && (!numToken.endsWith('e'))) {
 			lastToken = {
 				type: TokenType.Operator,
 				text: currToken,
