@@ -77,17 +77,13 @@ export const parse = (tokens: Token[]) => {
 				break;
 			
 			case TokenType.Operator:
-				if((currBranch.operation) && (OPERATORS.includes(token.text as Operator))) {
-					currBranch.operation.push(token.text as Operator);
-					console.log(currBranch.operation);
-				}
+				if((currBranch.operation) && (OPERATORS.includes(token.text as Operator))) currBranch.operation.push(token.text as Operator);
 				else handleError('invalid operator token', line+1, -1);
 				break;
 			
 			case TokenType.EOL:
 				line++;
 				if((currBranch.type) && (currBranch.value || currBranch.identifier || currBranch.operation)) {
-					// console.log(currBranch.operation);
 					syntaxTree.push({...currBranch, line});
 					currBranch = {};
 					expStage = 0;
