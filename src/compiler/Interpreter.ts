@@ -46,5 +46,8 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 const parseOperation = (operationTree: OperationTree) => {
 
+	for(const operation in operationTree) {
+		
+	}
 
 }
