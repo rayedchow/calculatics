@@ -44,7 +44,7 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 }
 
-const parseOperation = (operationTree: OperationTree) => {
+const parseOperation = (operationTree: OperationTree, line: number) => {
 
 	let currValue;
 	let currPriority = 0;
@@ -52,8 +52,9 @@ const parseOperation = (operationTree: OperationTree) => {
 
 	for(const operation of operationTree) {
 		
-		if(operation instanceof Array) {
-
+		if((typeof operation === 'object') && (!Array.isArray(operation))) {
+			if(!operation.identifier) handleError('invalid object in operation', line, -1);
+			
 		}
 		
 	}

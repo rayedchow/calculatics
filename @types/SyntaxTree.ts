@@ -66,7 +66,8 @@ export const OPERATORS = [
 // }
 
 // OPERATION PRIORITIES (similar to PEMDAS)
-// 1 - Operations (())
-// 2 - Exponents (^)
-// 3 - Multiplication & Divison (* & /)
-// 4 - Addition & Subtraction (+ & -)
+// 1 - Variables
+// 2 - Operations (())
+// 3 - Exponents (^)
+// 4 - Multiplication & Divison (* & /)
+// 5 - Addition & Subtraction (+ & -)
