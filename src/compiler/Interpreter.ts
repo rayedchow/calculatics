@@ -1,4 +1,4 @@
-import { OperationTree, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
+import { OperationTree, PriorityOperationItem, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
 import { handleError } from "../errorHandler";
 
 const identifierScope: Scope = {
@@ -46,15 +46,28 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 const parseOperation = (operationTree: OperationTree, line: number) => {
 
-	let currValue;
-	let currPriority = 0;
-	const operationPriority = [];
+	const currOperation: OperationTree = [];
+	const operationPriority: PriorityOperationItem[] = [];
 
 	for(const operation of operationTree) {
 		
 		if((typeof operation === 'object') && (!Array.isArray(operation))) {
 			if(!operation.identifier) handleError('invalid object in operation', line, -1);
+			// safe to assume operation is a variable identifier
+			operationPriority.push({
+				operation,
+				type: 'VARIABLE',
+				priority: 1
+			});
+		} else if(Array.isArray(operation)) {
+			if(operation.length < 3) handleError('invalid nested operation', line, -1);
+			// safe to assume its a valid nest operation
 			
+			operationPriority.push({
+				operation,
+				type: 'OPERATION',
+				priority: 2
+			})
 		}
 		
 	}
