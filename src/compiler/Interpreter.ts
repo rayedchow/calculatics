@@ -46,9 +46,14 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 const parseOperation = (operationTree: OperationTree) => {
 
-	let currNumber;
+	let currValue;
+	const operationStack = [];
 
-	for(const operation in operationTree) {
+	for(const operation of operationTree) {
+		
+		if(operation instanceof Array) {
+
+		}
 		
 	}
 
