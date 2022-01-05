@@ -46,7 +46,8 @@ export const OPERATORS = [
 // ]
 
 // example operation tree:
-// for operation: 5+(39-18)/m
+// for operation: 5+(39-18)/m   NOTE: m=2
+// 5+(11)/2 = 5+5.5 = 10.5
 // const exampleOperation = {
 // 	type: 'RETURN_STATEMENT',
 // 	operation: [
@@ -54,7 +55,8 @@ export const OPERATORS = [
 // 		'+',
 // 		[
 // 			39,
-// 			'-'
+// 			'-',
+//			18
 // 		],
 // 		'/',
 // 		{

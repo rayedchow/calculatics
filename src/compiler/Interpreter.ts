@@ -46,6 +46,8 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 const parseOperation = (operationTree: OperationTree) => {
 
+	let currNumber;
+
 	for(const operation in operationTree) {
 		
 	}
