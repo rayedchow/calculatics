@@ -79,6 +79,11 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 			// safe to assume operation is valid num
 			currOperationTree.push(operation);
 			if(currOperationTree.length === 3) {
+				operationPriority.push({
+					operation: currOperationTree,
+					type: 'OPERATION',
+					priority: 3
+				});
 				currOperationTree = [];
 			}
 		} else if(OPERATORS.includes(operation)) {
