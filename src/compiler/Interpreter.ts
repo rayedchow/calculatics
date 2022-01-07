@@ -1,4 +1,4 @@
-import { OperationTree, OPERATORS, PriorityOperationItem, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
+import { OperationTree, Operator, OPERATORS, PriorityOperationItem, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
 import { handleError } from "../errorHandler";
 
 const identifierScope: Scope = {
@@ -49,6 +49,7 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 	const currOperationTree: OperationTree = [];
 	const operationPriority: PriorityOperationItem[] = [];
 
+	// getting priority and splitting up operations
 	for(const operation of operationTree) {
 		
 		if((typeof operation === 'object') && (!Array.isArray(operation))) {
@@ -70,9 +71,16 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 				priority: 2
 			});
 		} else if(typeof operation === 'number') {
-			if((currOperationTree.length !== 0) && (currOperationTree.length !== 2)) handleError('invalid number in operation', line, -1);
+			if((currOperationTree.length !== 0) && (currOperationTree.length !== 2))
+				handleError('invalid number in operation', line, -1);
+			if((currOperationTree.length === 2) && (OPERATORS.includes(currOperationTree[1] as Operator)))
+				handleError('invalid operation', line, -1);
+			
 			// safe to assume operation is valid num
 			currOperationTree.push(operation);
+			if(currOperationTree.length === 3) {
+				if(!currOperationTree[1])
+			}
 		} else if(OPERATORS.includes(operation)) {
 			if(currOperationTree.length !== 1) handleError('invalid operator in operation', line, -1);
 			// safe to assume operation is valid operator
@@ -80,5 +88,8 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 		}
 		
 	}
+
+	// sorting by priority
+	operationPriority.sort((a, b) => a.priority - b.priority);
 
 }
