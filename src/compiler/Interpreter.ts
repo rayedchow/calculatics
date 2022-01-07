@@ -54,6 +54,7 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 		if((typeof operation === 'object') && (!Array.isArray(operation))) {
 			if(!operation.identifier) handleError('invalid object in operation', line, -1);
 			// safe to assume operation is a variable identifier
+			
 			operationPriority.push({
 				operation,
 				type: 'VARIABLE',
