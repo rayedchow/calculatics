@@ -67,7 +67,7 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 				operation,
 				type: 'OPERATION',
 				priority: 2
-			})
+			});
 		}
 		
 	}
