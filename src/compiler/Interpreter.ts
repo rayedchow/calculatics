@@ -77,7 +77,7 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 			if(currOperationTree.length !== 1) handleError('invalid operator in operation', line, -1);
 			// safe to assume operation is valid operator
 			currOperationTree.push(operation);
-		} else if(()) {
+		} else if((typeof operation === 'object') && (operation.identifier != null)) {
 
 		}
 		
