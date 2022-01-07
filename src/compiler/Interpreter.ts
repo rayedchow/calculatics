@@ -1,4 +1,4 @@
-import { OperationTree, PriorityOperationItem, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
+import { OperationTree, OPERATORS, PriorityOperationItem, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
 import { handleError } from "../errorHandler";
 
 const identifierScope: Scope = {
@@ -46,7 +46,7 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 const parseOperation = (operationTree: OperationTree, line: number) => {
 
-	const currOperation: OperationTree = [];
+	const currOperationTree: OperationTree = [];
 	const operationPriority: PriorityOperationItem[] = [];
 
 	for(const operation of operationTree) {
@@ -54,7 +54,7 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 		if((typeof operation === 'object') && (!Array.isArray(operation))) {
 			if(!operation.identifier) handleError('invalid object in operation', line, -1);
 			// safe to assume operation is a variable identifier
-			
+
 			operationPriority.push({
 				operation,
 				type: 'VARIABLE',
@@ -69,6 +69,14 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 				type: 'OPERATION',
 				priority: 2
 			});
+		} else if(typeof operation === 'number') {
+			if((currOperationTree.length !== 0) && (currOperationTree.length !== 2)) handleError('invalid number in operation', line, -1);
+			// safe to assume operation is valid num
+			currOperationTree.push(operation);
+		} else if(OPERATORS.includes(operation)) {
+			if(currOperationTree.length !== 1) handleError('invalid operator in operation', line, -1);
+			// safe to assume operation is valid operator
+			currOperationTree.push(operation);
 		}
 		
 	}
