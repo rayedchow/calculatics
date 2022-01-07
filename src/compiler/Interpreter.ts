@@ -46,7 +46,7 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 const parseOperation = (operationTree: OperationTree, line: number) => {
 
-	const currOperationTree: OperationTree = [];
+	let currOperationTree: OperationTree = [];
 	const operationPriority: PriorityOperationItem[] = [];
 
 	// getting priority and splitting up operations
@@ -79,7 +79,7 @@ const parseOperation = (operationTree: OperationTree, line: number) => {
 			// safe to assume operation is valid num
 			currOperationTree.push(operation);
 			if(currOperationTree.length === 3) {
-				if(!currOperationTree[1])
+				currOperationTree = [];
 			}
 		} else if(OPERATORS.includes(operation)) {
 			if(currOperationTree.length !== 1) handleError('invalid operator in operation', line, -1);
