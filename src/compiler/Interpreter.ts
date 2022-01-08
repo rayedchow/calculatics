@@ -55,9 +55,10 @@ export const parseOperation = (operationTree: OperationTree, line: number): Prio
 	for(const operation of operationTree) {
 		
 		
+		
 	}
 
 	// sorting by priority
-	operationPriority.sort((a, b) => a.priority - b.priority);
+	operationPriority.sort((a, b) => b.priority - a.priority);
 	return operationPriority;
 }
