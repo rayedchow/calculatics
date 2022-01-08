@@ -2,7 +2,7 @@ example for operation: `5-2+30/15*1-20`
 
 `OperationTree`:
 ```js
-data: [
+[
 	5,
 	'-',
 	2,
@@ -19,7 +19,7 @@ data: [
 
 `PriorityOperationTree`:
 ```js
-data: [
+[
 	5,
 	'-',
 	2,
