@@ -16,6 +16,8 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 		else if(branch.identifier) {
 			if(!identifierScope.global[branch.identifier]) handleError('invalid log identifier use', branch.line, -1);
 			console.log(identifierScope.global[branch.identifier].value);
+		} else if(branch.operation) {
+			console.log(branch.operation);
 		}
 		else handleError('unknown log value', branch.line, -1);
 	}
