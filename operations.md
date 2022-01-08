@@ -1,4 +1,4 @@
-example for operation: `5-2+30/15-20`  
+example for operation: `5-2+30/15-20`
 
 `OperationTree`:
 ```js
@@ -18,18 +18,17 @@ data: [
 `PriorityOperationTree`:
 ```js
 data: [
-	{
-		operation: [
-			5,
-			'-',
-			2,
-			'+',
-			30,
-			'-',
-			20
-		],
-		priority: 3
-	}
+	5,
+	'-',
+	2,
+	'+',
+	[
+		30,
+		'/',
+		15
+	],
+	'-',
+	20
 ]
 ```
 
