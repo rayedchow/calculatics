@@ -51,6 +51,9 @@ const testCase = (caseNum: number) => {
 	const testTree: OperationTree = [
 		3,
 		'+',
+		2,
+		3,
+		'-',
 		2
 	];
 
