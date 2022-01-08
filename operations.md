@@ -10,3 +10,4 @@ operationTree: [
 	20
 ]
 ```
+This requires no queue struct
