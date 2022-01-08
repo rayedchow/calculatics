@@ -44,7 +44,7 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 }
 
-const parseOperation = (operationTree: OperationTree, line: number) => {
+export const parseOperation = (operationTree: OperationTree, line: number) => {
 
 	let currOperationTree: OperationTree = [];
 	const operationPriority: PriorityOperationItem[] = [];
