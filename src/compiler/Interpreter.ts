@@ -51,15 +51,8 @@ const priorityOperation = (operationTree: OperationTree, line: number): Operatio
 
 	for(const operation of operationTree) {
 		
-		if(typeof operation === 'number') {
-			
-		}
-		if((typeof operation === 'object') && (!Array.isArray(operation))) {
-			if(!operation.identifier) handleError('invalid object in operation', line, -1);
-			// safe to assume operation is a variable identifier
-
-			operationPriority.push(operation);
-		}
+		
+		operationPriority.push(operation);
 
 	}
 
