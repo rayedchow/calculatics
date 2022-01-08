@@ -1,14 +1,14 @@
 // PRODUCTION CODE:
-// import { handleArgs } from "./argHandler";
+import { handleArgs } from "./argHandler";
 
-// const CLI_ARGS = process.argv.slice(2);
-// handleArgs(CLI_ARGS);
+const CLI_ARGS = process.argv.slice(2);
+handleArgs(CLI_ARGS);
 
 // TESTING CODE:
 // - uses testing library to perform
 //	 test cases on .calc files
-import { testLibrary } from "./testHandler";
+// import { testLibrary } from "./testHandler";
 
-testLibrary([
-	null,
-]);
+// testLibrary([
+// 	null,
+// ]);
