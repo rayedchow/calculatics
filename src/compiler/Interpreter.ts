@@ -44,7 +44,7 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 }
 
-export const parseOperation = (operationTree: OperationTree, line: number) => {
+export const parseOperation = (operationTree: OperationTree, line: number): PriorityOperationItem[] => {
 
 	let currOperationTree: OperationTree = [];
 	const operationPriority: PriorityOperationItem[] = [];
@@ -96,5 +96,5 @@ export const parseOperation = (operationTree: OperationTree, line: number) => {
 
 	// sorting by priority
 	operationPriority.sort((a, b) => a.priority - b.priority);
-
+	return operationPriority;
 }
