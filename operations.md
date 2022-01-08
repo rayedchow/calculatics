@@ -1,4 +1,4 @@
-example for operation: `5-2+(30-20)`
+example for operation: `5-2+30-20`
 [
 	{
 		operation: [

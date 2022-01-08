@@ -52,7 +52,6 @@ const testCase = (caseNum: number) => {
 		3,
 		'+',
 		2,
-		3,
 		'-',
 		2
 	];
