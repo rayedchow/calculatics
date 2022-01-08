@@ -46,13 +46,21 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 }
 
-const priorityOperation = (operationTree: OperationTree): OperationTree => {
+const priorityOperation = (operationTree: OperationTree, line: number): OperationTree => {
 	const operationPriority: OperationTree = [];
 
 	for(const operation of operationTree) {
 		
+		if(typeof operation === 'number') {
+			
+		}
+		if((typeof operation === 'object') && (!Array.isArray(operation))) {
+			if(!operation.identifier) handleError('invalid object in operation', line, -1);
+			// safe to assume operation is a variable identifier
 
-		
+			operationPriority.push(operation);
+		}
+
 	}
 
 	return operationPriority;
@@ -61,7 +69,7 @@ const priorityOperation = (operationTree: OperationTree): OperationTree => {
 export const parseOperation = (operationTree: OperationTree, line: number): OperationTree => {
 
 	let currOperationTree: OperationTree = [];
-	const operationPriority = priorityOperation(operationTree);
+	const operationPriority = priorityOperation(operationTree, line);
 
 	// sorting by priority
 	return operationPriority;
