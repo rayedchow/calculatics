@@ -52,45 +52,6 @@ export const parseOperation = (operationTree: OperationTree, line: number): Prio
 	// getting priority and splitting up operations
 	for(const operation of operationTree) {
 		
-		if((typeof operation === 'object') && (!Array.isArray(operation))) {
-			if(!operation.identifier) handleError('invalid object in operation', line, -1);
-			// safe to assume operation is a variable identifier
-
-			operationPriority.push({
-				operation,
-				type: 'VARIABLE',
-				priority: 1
-			});
-		} else if(Array.isArray(operation)) {
-			if(operation.length < 3) handleError('invalid nested operation', line, -1);
-			// safe to assume its a valid nest operation
-			
-			operationPriority.push({
-				operation,
-				type: 'OPERATION',
-				priority: 2
-			});
-		} else if(typeof operation === 'number') {
-			if((currOperationTree.length !== 0) && (currOperationTree.length !== 2))
-				handleError('invalid number in operation', line, -1);
-			if((currOperationTree.length === 2) && (!OPERATORS.includes(currOperationTree[1] as Operator)))
-				handleError('invalid operation', line, -1);
-			
-			// safe to assume operation is valid num
-			currOperationTree.push(operation);
-			if(currOperationTree.length === 3) {
-				operationPriority.push({
-					operation: currOperationTree,
-					type: 'OPERATION',
-					priority: 3
-				});
-				currOperationTree = [];
-			}
-		} else if(OPERATORS.includes(operation)) {
-			if(currOperationTree.length !== 1) handleError('invalid operator in operation', line, -1);
-			// safe to assume operation is valid operator
-			currOperationTree.push(operation);
-		}
 		
 	}
 
