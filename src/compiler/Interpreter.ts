@@ -73,7 +73,7 @@ export const parseOperation = (operationTree: OperationTree, line: number) => {
 		} else if(typeof operation === 'number') {
 			if((currOperationTree.length !== 0) && (currOperationTree.length !== 2))
 				handleError('invalid number in operation', line, -1);
-			if((currOperationTree.length === 2) && (OPERATORS.includes(currOperationTree[1] as Operator)))
+			if((currOperationTree.length === 2) && (!OPERATORS.includes(currOperationTree[1] as Operator)))
 				handleError('invalid operation', line, -1);
 			
 			// safe to assume operation is valid num
