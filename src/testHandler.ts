@@ -1,3 +1,4 @@
+import { OperationTree } from "../@types/SyntaxTree";
 import { compile } from "./compiler/compile";
 
 // ---- The Calculatics Testing Library ----
@@ -41,8 +42,15 @@ export const testLibrary = (test: any[]) => {
 const testCase = (caseNum: number) => {
 
 	// reads test case file & compiles
-	const fileDir = `${process.cwd()}/test/case-${caseNum}.calc`;
-	const compileData = compile(fileDir);
+	// const fileDir = `${process.cwd()}/test/case-${caseNum}.calc`;
+	// const compileData = compile(fileDir);
+	// return compileData;
 
-	return compileData;
+	// tests operation tree sequence
+	const testTree: OperationTree = [
+		3,
+		'+',
+		2
+	];
+	
 }
