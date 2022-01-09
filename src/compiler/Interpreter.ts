@@ -46,11 +46,26 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 }
 
-const priorityOperation = (operationTree: OperationTree): OperationTree => {
+const priorityOperation = (operationTree: OperationTree, nested: boolean = false): OperationTree => {
 	const operationPriority: OperationTree = [];
 
-	for(const operation of operationTree) {
-		
+	for(let i = 0; i < operationTree.length; i++) {
+		const operation = operationTree[i];
+
+		if(['*','/'].includes(operation as Operator)) {
+			if(!nested) {
+				operationPriority.pop();
+				operationPriority.push(
+					priorityOperation(
+						operationTree.slice(i-1,operationTree.length), // getting rest of operation tree
+						true
+					)
+				);
+			} else {
+				 
+			}
+			continue;
+		}
 
 		operationPriority.push(operation);
 
