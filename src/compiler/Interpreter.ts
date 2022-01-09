@@ -48,6 +48,7 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 
 const priorityOperation = (operationTree: OperationTree, nested: boolean = false): OperationTree => {
 	const operationPriority: OperationTree = [];
+	let nestOperator = true;
 
 	for(let i = 0; i < operationTree.length; i++) {
 		const operation = operationTree[i];
@@ -61,9 +62,11 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 						true
 					)
 				);
-			} else {
-				 
-			}
+			} else if((nested) && (!nestOperator)) {
+
+				
+				
+			} if(nestOperator) nestOperator = false;
 			continue;
 		}
 
