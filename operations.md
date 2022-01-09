@@ -1,4 +1,4 @@
-example for operation: `5-2+30/15*1-20`
+example for operation: `5-2+30/15+2*1-20`
 
 `OperationTree`:
 ```js
@@ -10,6 +10,8 @@ example for operation: `5-2+30/15*1-20`
     30,
     '/',
     15,
+    '+',
+    2,
     '*',
     1,
     '-',
@@ -30,8 +32,12 @@ example for operation: `5-2+30/15*1-20`
             '/',
             15
         ],
-        '*',
-        1
+        '+',
+        [
+            2,
+            '*',
+            1
+        ]
     ],
     '-',
     20

@@ -58,7 +58,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 				operationPriority.pop();
 				operationPriority.push(
 					priorityOperation(
-						operationTree.slice(i-1,operationTree.length), // getting rest of operation tree
+						operationTree.slice(i-1), // getting rest of operation tree
 						true
 					)
 				);
