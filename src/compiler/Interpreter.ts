@@ -122,6 +122,7 @@ export const evalOperation = (priorityTree: OperationTree, line: number): number
 
 			switch(currOperator) {
 				case '+':
+					currNum += priorityNode;
 					break;
 
 				default:
