@@ -116,10 +116,18 @@ export const evalOperation = (priorityTree: OperationTree, line: number): number
 			currOperator = priorityNode;
 		}
 
-		if(((currNum) && (!currOperator)) || ((!currNum) && (currOperator)))
-			return handleError('invalid num/operator pair in operation tree', line, -1);
-		
-		// if(priorityNode)
+		// getting nums
+		if(typeof priorityNode === 'number') {
+			if(!currOperator) return handleError('invalid number usage in operation tree', line, -1);
+
+			switch(currOperator) {
+				case '+':
+					break;
+
+				default:
+					break;
+			}
+		}
 	}
 
 	return currNum;
