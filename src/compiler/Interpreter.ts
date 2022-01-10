@@ -95,15 +95,22 @@ export const evalOperation = (priorityTree: OperationTree, line: number): number
 	let currOperator: Operator | null;
 
 	for(let i = 1; i < priorityTree.length; i++) {
-		const priorityNode = priorityTree[i];
+		let priorityNode = priorityTree[i];
+
+		if((typeof priorityNode === 'object') && (!Array.isArray(priorityNode))) {
+			const variableObj = identifierScope.global[priorityNode.identifier];
+			if(!variableObj) return handleError('invalid identifier in operation tree', line, -1);
+
+			priorityNode = variableObj.value;
+		}
 
 		if(((currNum) && (!currOperator)) || ((!currNum) && (currOperator)))
 			return handleError('invalid num/operator pair in operation tree', line, -1);
 		
-			
+		// if(priorityNode)
 	}
 
-	return NaN;
+	return currNum;
 }
 
 export const parseOperation = (operationTree: OperationTree, line: number): OperationTree => {
