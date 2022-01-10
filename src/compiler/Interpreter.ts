@@ -62,12 +62,10 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 						true
 					)
 				);
-			} else if((nested) && (!nestOperator)) {
-
-				
-				
 			} if(nestOperator) nestOperator = false;
 			continue;
+		} if((['+','-'].includes(operation as Operator)) && (nested)) {
+			return operationPriority;
 		}
 
 		operationPriority.push(operation);
