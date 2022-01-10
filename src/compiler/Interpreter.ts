@@ -89,13 +89,14 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 export const evalOperation = (priorityTree: OperationTree, line: number): number => {
 
-	if(typeof priorityTree[0] !== 'number') return handleError('invalid number in tree', line, -1);
+	if(typeof priorityTree[0] !== 'number') return handleError('invalid number in operation tree', line, -1);
 	let currNum: number = priorityTree[0];
 	let currOperator: Operator | null;
 
-	for(let i = 0; i < priorityTree.length; i++) {
+	for(let i = 1; i < priorityTree.length; i++) {
 		const priorityNode = priorityTree[i];
 
+		if((currNum) && (!currOperator)) return handleError('invalid num/operator pair in operation tree', line, -1);
 		
 	}
 
