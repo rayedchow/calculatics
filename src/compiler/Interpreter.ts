@@ -62,7 +62,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 						true
 					)
 				);
-			} else if(nested) {
+			} else if((nested) && (!nestOperator)) {
 
 				
 
