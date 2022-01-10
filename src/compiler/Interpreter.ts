@@ -97,7 +97,6 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 		return handleError('invalid number in operation tree', line, -1);
 	let currNum: number = priorityTree[0];
 	let currOperator: Operator | null;
-	console.log(priorityTree);
 
 	for(let i = 1; i < priorityTree.length; i++) {
 		let priorityNode = priorityTree[i];
@@ -158,7 +157,6 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 
 export const parseOperation = (operationTree: OperationTree, line: number): number => {
 
-	let currOperationTree: OperationTree = [];
 	const priorityTree = priorityOperation(operationTree);
 	const evaluatedResult = evalOperation(priorityTree, line);
 
