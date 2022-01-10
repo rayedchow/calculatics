@@ -16,9 +16,8 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 		else if(branch.identifier) {
 			if(!identifierScope.global[branch.identifier]) handleError('invalid log identifier use', branch.line, -1);
 			console.log(identifierScope.global[branch.identifier].value);
-		} else if(branch.operation) {
-			console.log(branch.operation);
-		}
+		} else if(branch.operation)
+			console.log(parseOperation(branch.operation, branch.line));
 		else handleError('unknown log value', branch.line, -1);
 	}
 
@@ -33,6 +32,8 @@ export const interpret = (syntaxTree: SyntaxBranch[]) => {
 				log(branch);
 				break;
 			case 'VARIABLE_STATEMENT':
+				if(branch.operation)
+					branch.value = parseOperation(branch.operation, branch.line);
 				if((branch.identifier) && (branch.value))
 					identifierScope.global[branch.identifier] = { value: branch.value };
 				else handleError('unknown variable value', branch.line, -1);
