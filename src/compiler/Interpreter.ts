@@ -87,6 +87,14 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 	return operationPriority;
 }
 
+export const evalOperation = (priorityTree: OperationTree, line: number): number => {
+
+	if(typeof priorityTree[0] !== 'number') return handleError('invalid number in tree', line, -1);
+	let currNum: number = priorityTree[0];
+
+	return NaN;
+}
+
 export const parseOperation = (operationTree: OperationTree, line: number): OperationTree => {
 
 	let currOperationTree: OperationTree = [];
