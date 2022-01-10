@@ -36,8 +36,6 @@ export const testLibrary = (test: any[]) => {
 		console.log('----------------------------------')
 	}
 
-	
-
 }
 
 const testCase = (caseNum: number) => {
