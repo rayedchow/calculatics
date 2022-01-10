@@ -91,6 +91,13 @@ export const evalOperation = (priorityTree: OperationTree, line: number): number
 
 	if(typeof priorityTree[0] !== 'number') return handleError('invalid number in tree', line, -1);
 	let currNum: number = priorityTree[0];
+	let currOperator: Operator | null;
+
+	for(let i = 0; i < priorityTree.length; i++) {
+		const priorityNode = priorityTree[i];
+
+		
+	}
 
 	return NaN;
 }
