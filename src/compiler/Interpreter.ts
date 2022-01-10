@@ -56,6 +56,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 		if(['*','/'].includes(operation as Operator)) {
 			if(!nested) {
 				operationPriority.pop();
+				console.log(operationTree.slice(i-1));
 				operationPriority.push(
 					priorityOperation(
 						operationTree.slice(i-1), // getting rest of operation tree
@@ -74,8 +75,9 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 					)
 				];
 
-			} if(nestOperator) nestOperator = false;
-			continue;
+			}
+			if(nestOperator) nestOperator = false;
+			else continue;
 		} if((['+','-'].includes(operation as Operator)) && (nested)) {
 			return operationPriority;
 		}
@@ -119,7 +121,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 		// getting nums
 		if(typeof priorityNode === 'number') {
 			if(!currOperator) {
-				console.log(currNum, currOperator);
+				console.log(currNum, currOperator, priorityTree);
 				return handleError('invalid number usage in operation tree', line, -1);
 			}
 
