@@ -37,12 +37,6 @@ export const OPERATORS = [
 	'/'
 ] as const;
 
-export interface PriorityOperationItem {
-	operation: VariableIdentifier | OperationTree,
-	type: 'VARIABLE' | 'OPERATION',
-	priority: number
-}
-
 // example syntax tree:
 // [
 //	 {
