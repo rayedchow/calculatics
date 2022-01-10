@@ -1,4 +1,4 @@
-import { OperationTree, Operator, OPERATORS, PriorityOperationItem, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
+import { OperationTree, Operator, Scope, SyntaxBranch } from "../../@types/SyntaxTree";
 import { handleError } from "../errorHandler";
 
 const identifierScope: Scope = {
@@ -55,14 +55,16 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 		if(['*','/'].includes(operation as Operator)) {
 			if(!nested) {
+
 				operationPriority.pop();
-				console.log(operationTree.slice(i-1));
-				operationPriority.push(
-					priorityOperation(
-						operationTree.slice(i-1), // getting rest of operation tree
-						true
-					)
+				const nestedOperation = priorityOperation(
+					operationTree.slice(i-1), // getting rest of operation tree
+					true
 				);
+				operationPriority.push(nestedOperation);
+				i+=nestedOperation.length-2;
+				continue;
+
 			} else if((nested) && (!nestOperator)) {
 
 				// creates nested of nested operation
@@ -74,10 +76,10 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 						true
 					)
 				];
+				continue;
 
 			}
 			if(nestOperator) nestOperator = false;
-			else continue;
 		} if((['+','-'].includes(operation as Operator)) && (nested)) {
 			return operationPriority;
 		}
@@ -95,6 +97,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 		return handleError('invalid number in operation tree', line, -1);
 	let currNum: number = priorityTree[0];
 	let currOperator: Operator | null;
+	console.log(priorityTree);
 
 	for(let i = 1; i < priorityTree.length; i++) {
 		let priorityNode = priorityTree[i];
@@ -148,6 +151,8 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 			currOperator = null;
 		}
 	}
+
+	if(currOperator) return handleError('invalid end of operation operator', line, -1);
 
 	return currNum;
 }
