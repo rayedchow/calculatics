@@ -128,6 +128,10 @@ export const evalOperation = (priorityTree: OperationTree, line: number): number
 				case '-':
 					currNum -= priorityNode;
 					break;
+				
+				case "*":
+					currNum *= priorityNode;
+					break;
 
 				default:
 					break;
