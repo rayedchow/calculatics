@@ -68,14 +68,19 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 			} else if((nested) && (!nestOperator)) {
 
 				// creates nested of nested operation
+				const nestedOperation = priorityOperation(
+					operationTree.slice(i-1),
+					true
+				);
+
+				// updates nested sequence
 				operationPriority = [
 					operationPriority,
 					operation,
-					priorityOperation(
-						operationTree.slice(i-1),
-						true
-					)
+					nestedOperation
 				];
+				console.log('WHAT', operationPriority);
+				i++;
 				continue;
 
 			}

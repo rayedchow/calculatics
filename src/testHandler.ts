@@ -52,9 +52,11 @@ const testCase = (caseNum: number) => {
 		2,
 		'*',
 		2,
+		'/',
+		3,
 		'+',
-		1
-	];
+		5
+	]; // 3+2*2/3+5
 
 	return parseOperation(testTree, -1);
 }
