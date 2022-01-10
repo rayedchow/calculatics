@@ -97,11 +97,17 @@ export const evalOperation = (priorityTree: OperationTree, line: number): number
 	for(let i = 1; i < priorityTree.length; i++) {
 		let priorityNode = priorityTree[i];
 
+		// evaluating variable identifiers
 		if((typeof priorityNode === 'object') && (!Array.isArray(priorityNode))) {
 			const variableObj = identifierScope.global[priorityNode.identifier];
 			if(!variableObj) return handleError('invalid identifier in operation tree', line, -1);
 
 			priorityNode = variableObj.value;
+		}
+
+		// evaluating nested trees
+		else if((typeof priorityNode === 'object') && (Array.isArray(priorityNode))) {
+			priorityNode = evalOperation(priorityNode, -1);
 		}
 
 		if(((currNum) && (!currOperator)) || ((!currNum) && (currOperator)))
