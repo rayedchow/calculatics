@@ -118,7 +118,10 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 
 		// getting nums
 		if(typeof priorityNode === 'number') {
-			if(!currOperator) return handleError('invalid number usage in operation tree', line, -1);
+			if(!currOperator) {
+				console.log(currNum, currOperator);
+				return handleError('invalid number usage in operation tree', line, -1);
+			}
 
 			switch(currOperator) {
 				case '+':
@@ -140,6 +143,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 				default:
 					break;
 			}
+			currOperator = null;
 		}
 	}
 

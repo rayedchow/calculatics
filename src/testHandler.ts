@@ -49,7 +49,9 @@ const testCase = (caseNum: number) => {
 	const testTree: OperationTree = [
 		3,
 		'+',
-		2
+		2,
+		'*',
+		1
 	];
 
 	return parseOperation(testTree, -1);
