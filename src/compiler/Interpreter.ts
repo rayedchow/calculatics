@@ -74,12 +74,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 				);
 
 				// updates nested sequence
-				operationPriority = [
-					operationPriority,
-					operation,
-					nestedOperation
-				];
-				console.log('WHAT', operationPriority);
+				operationPriority.push(operation, operationTree[i+1]);
 				i++;
 				continue;
 
@@ -129,7 +124,6 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 		// getting nums
 		if(typeof priorityNode === 'number') {
 			if(!currOperator) {
-				console.log(currNum, currOperator, priorityTree);
 				return handleError('invalid number usage in operation tree', line, -1);
 			}
 
