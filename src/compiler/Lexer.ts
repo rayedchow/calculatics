@@ -143,7 +143,6 @@ export const lex = (charSequence: string[]) => {
 	}
 
 	if((currToken !== '') || (numToken !== '')) {
-		console.log(currToken, numToken);
 		handleError('invalid EOF expression', line+1, linePos+1);
 	}
 
