@@ -110,8 +110,7 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		if((lastToken) && (lastToken.type === TokenType.Number) &&
-			(OPERATORS.includes(currToken as Operator)) && (!numToken.endsWith('e'))) {
+		if((lastToken) && (OPERATORS.includes(currToken as Operator)) && (!numToken.endsWith('e'))) {
 			lastToken = {
 				type: TokenType.Operator,
 				text: currToken,
