@@ -161,7 +161,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 	return currNum;
 }
 
-export const parseOperation = (operationTree: OperationTree, line: number): number => {
+export const parseOperationTree = (operationTree: OperationTree, line: number): number => {
 
 	const priorityTree = priorityOperation(operationTree);
 	const evaluatedResult = evalOperation(priorityTree, line);

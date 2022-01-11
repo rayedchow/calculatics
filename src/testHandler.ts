@@ -1,6 +1,6 @@
 import { OperationTree } from "../@types/SyntaxTree";
-import { compile } from "./compiler/compile";
-import { parseOperation } from "./compiler/Interpreter";
+// import { compile } from "./compiler/compile";
+import { parseOperationTree } from "./compiler/Interpreter";
 
 // ---- The Calculatics Testing Library ----
 // The testing library is used in development
@@ -60,5 +60,5 @@ const testCase = (caseNum: number) => {
 		]
 	]; // (3+2*2)*(2+5)
 
-	return parseOperation(testTree, -1);
+	return parseOperationTree(testTree, -1);
 }
