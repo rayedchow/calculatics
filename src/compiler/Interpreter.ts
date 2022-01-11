@@ -110,7 +110,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 
 		// evaluating nested trees
 		else if((typeof priorityNode === 'object') && (Array.isArray(priorityNode))) {
-			priorityNode = evalOperation(priorityNode, -1);
+			priorityNode = evalOperation(priorityNode, line);
 		}
 
 		// getting operator
