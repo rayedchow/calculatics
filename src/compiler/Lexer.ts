@@ -14,6 +14,7 @@ export const lex = (charSequence: string[]) => {
 	let numToken = '';
 	let identifierToken = '';
 	let lastToken: Token;
+	let isOperator = false;
 
 	let pos = 0;
 	let line = 0;
@@ -60,10 +61,8 @@ export const lex = (charSequence: string[]) => {
 		}
 
 		if(currToken === '->') {
-			if((lastToken) && (lastToken.type !== TokenType.Statement)) {
-				console.log(lastToken);
+			if((lastToken) && (lastToken.type !== TokenType.Statement))
 				handleError('invalid pointer token', line+1, linePos+1);
-			}
 			lastToken = {
 				type: TokenType.Pointer,
 				text: currToken,
@@ -95,6 +94,7 @@ export const lex = (charSequence: string[]) => {
 				text: currToken,
 				pos
 			};
+			isOperator = true;
 			tokens.push(lastToken);
 			currToken = '';
 		}
@@ -105,6 +105,7 @@ export const lex = (charSequence: string[]) => {
 				text: currToken,
 				pos
 			};
+			isOperator = false;
 			tokens.push(lastToken);
 			currToken = '';
 		}
@@ -132,7 +133,7 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		else if((lastToken) && (!/[^a-zA-Z]/.test(currToken))) {
+		else if((lastToken) && ((lastToken.type === TokenType.Pointer) || (isOperator)) && (!/[^a-zA-Z]/.test(currToken))) {
 			identifierToken += currToken;
 			currToken = '';
 		}
@@ -142,8 +143,6 @@ export const lex = (charSequence: string[]) => {
 	}
 
 	if((currToken !== '') || (numToken !== '')) {
-		console.log(tokens);
-		console.log(currToken, numToken);
 		handleError('invalid EOF expression', line+1, linePos+1);
 	}
 
