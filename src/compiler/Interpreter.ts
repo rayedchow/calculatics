@@ -97,7 +97,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 		if(Array.isArray(firstOperation)) currNum = evalOperation(firstOperation, line);
 		else if((!Array.isArray(firstOperation))) currNum = identifierScope.global[firstOperation.identifier].value;
 		else return handleError('invalid first operation in operation tree', line, -1);
-	}
+	} if(typeof firstOperation === 'number') currNum = firstOperation;
 	let currOperator: Operator | null;
 
 	for(let i = 1; i < priorityTree.length; i++) {
