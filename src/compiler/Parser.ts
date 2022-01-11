@@ -33,10 +33,13 @@ export const parse = (tokens: Token[]) => {
 				break;
 			
 			case TokenType.Identifier:
-				if((expStage >= 2) && (['VARIABLE_STATEMENT', 'RETURN_STATEMENT', 'LOG_STATEMENT'].includes(currBranch.type))) {
-					expStage++;
+				if((expStage === 2) && (['VARIABLE_STATEMENT', 'RETURN_STATEMENT', 'LOG_STATEMENT'].includes(currBranch.type))) {
+					expStage = 3;
 					currBranch.identifier = token.text;
-				}
+				} else if(currBranch.operation)
+					currBranch.operation.push({
+						identifier: token.text
+					});
 				else handleError('invalid identifier', line+1, -1);
 				break;
 			
