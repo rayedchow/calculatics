@@ -115,6 +115,11 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 			
 			case TokenType.OperationEnd:
 				return operationTree;
+			
+			case TokenType.Number:
+				break;
+			
+			// case TokenType.Identifier
 
 			default:
 				break;

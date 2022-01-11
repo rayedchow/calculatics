@@ -1,4 +1,5 @@
-ret->(5-2+30/15*1-1.348);
+var->m = 38;
+ret->(5-2+30/15*1-m);
 
 # -> VARIABLE DECLARING <- [x]
 # var->hello=65;

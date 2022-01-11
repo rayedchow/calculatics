@@ -48,7 +48,6 @@ export const lex = (charSequence: string[]) => {
 			(currToken === 'var')
 		) {
 			if((lastToken) && (lastToken.type !== TokenType.EOL)) {
-				console.log(lastToken);
 				handleError('invalid statement token', line+1, linePos+1);
 			}
 			lastToken = {
@@ -130,7 +129,7 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		else if((lastToken) && (lastToken.type === TokenType.Pointer) && (!/[^a-zA-Z]/.test(currToken))) {
+		else if((lastToken) && (!/[^a-zA-Z]/.test(currToken))) {
 			identifierToken += currToken;
 			currToken = '';
 		}
