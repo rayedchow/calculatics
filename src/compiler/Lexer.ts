@@ -14,7 +14,7 @@ export const lex = (charSequence: string[]) => {
 	let numToken = '';
 	let identifierToken = '';
 	let lastToken: Token;
-	let isOperator = false;
+	let currOperations = 0;
 
 	let pos = 0;
 	let line = 0;
@@ -94,7 +94,7 @@ export const lex = (charSequence: string[]) => {
 				text: currToken,
 				pos
 			};
-			isOperator = true;
+			currOperations++;
 			tokens.push(lastToken);
 			currToken = '';
 		}
@@ -105,7 +105,7 @@ export const lex = (charSequence: string[]) => {
 				text: currToken,
 				pos
 			};
-			isOperator = false;
+			currOperations--;
 			tokens.push(lastToken);
 			currToken = '';
 		}
@@ -133,7 +133,7 @@ export const lex = (charSequence: string[]) => {
 			currToken = '';
 		}
 
-		else if((lastToken) && ((lastToken.type === TokenType.Pointer) || (isOperator)) && (!/[^a-zA-Z]/.test(currToken))) {
+		else if((lastToken) && ((lastToken.type === TokenType.Pointer) || (currOperations>0)) && (!/[^a-zA-Z]/.test(currToken))) {
 			identifierToken += currToken;
 			currToken = '';
 		}
