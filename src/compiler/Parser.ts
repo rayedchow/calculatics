@@ -107,21 +107,18 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 	for(let i = 0; i < tokens.length; i++) {
 		const token = tokens[i];
 
-		// switch(token.type) {
+		switch(token.type) {
 
-		// 	case TokenType.
+			case TokenType.OperationStart:
+				operationTree.push(parseOperationTokens(tokens.slice(i)));
+				break;
+			
+			case TokenType.OperationEnd:
+				return operationTree;
 
-		// 	default:
-		// 		break;
-		// }
-
-		if(token.type === TokenType.OperationStart)
-			operationTree.push(parseOperationTokens(tokens.slice(i)));
-		
-		if(token.type === TokenType.OperationEnd)
-			return operationTree;
-		
-		if(token.type)
+			default:
+				break;
+		}
 	}
 
 	return handleError('unfinished operation tree; no EOO', -1, -1);
