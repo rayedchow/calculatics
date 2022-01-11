@@ -15,7 +15,8 @@ export const parse = (tokens: Token[]) => {
 
 	const syntaxTree: SyntaxBranch[] = [];
 
-	for(const token of tokens) {
+	for(let i = 0; i < tokens.length; i++) {
+		const token = tokens[i];
 
 		switch(token.type) {
 
@@ -69,6 +70,7 @@ export const parse = (tokens: Token[]) => {
 			case TokenType.OperationStart:
 				if((expStage >= 2) && (currBranch.type)) {
 					currBranch.operation = [];
+					console.log(parseOperationTokens(tokens.slice(i)));
 					expStage++;
 				}
 				else handleError('invalid operation start token', line+1, -1);
