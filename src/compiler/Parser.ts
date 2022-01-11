@@ -120,9 +120,16 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 				return operationTree;
 			
 			case TokenType.Number:
+				operationTree.push(Number(token.text));
 				break;
 			
-			// case TokenType.Identifier
+			case TokenType.Identifier:
+				operationTree.push({ identifier: token.text });
+				break;
+			
+			case TokenType.Operator:
+				operationTree.push(token.text as Operator);
+				break;
 
 			default:
 				break;
