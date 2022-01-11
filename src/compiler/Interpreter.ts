@@ -68,12 +68,6 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 			} else if((nested) && (!nestOperator)) {
 
-				// creates nested of nested operation
-				const nestedOperation = priorityOperation(
-					operationTree.slice(i-1),
-					true
-				);
-
 				// updates nested sequence
 				operationPriority.push(operation, operationTree[i+1]);
 				i++;
@@ -94,9 +88,13 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 const evalOperation = (priorityTree: OperationTree, line: number): number => {
 
-	if(typeof priorityTree[0] !== 'number')
+	if(typeof priorityTree[0] === 'string')
 		return handleError('invalid number in operation tree', line, -1);
+	
 	let currNum: number = priorityTree[0];
+	if(typeof priorityTree[0] === 'object') {
+		if(Array.isArray(priorityTree[0])) 
+	}
 	let currOperator: Operator | null;
 
 	for(let i = 1; i < priorityTree.length; i++) {

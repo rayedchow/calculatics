@@ -47,16 +47,18 @@ const testCase = (caseNum: number) => {
 
 	// tests operation tree sequence
 	const testTree: OperationTree = [
-		3,
-		'+',
-		2,
+		[
+			3,
+			'+',
+			2
+		],
 		'*',
 		[
 			2,
 			'+',
 			5
 		]
-	]; // 3+2*(2+5)
+	]; // (3+2)*(2+5)
 
 	return parseOperation(testTree, -1);
 }
