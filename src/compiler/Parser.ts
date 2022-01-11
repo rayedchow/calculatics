@@ -69,8 +69,9 @@ export const parse = (tokens: Token[]) => {
 			
 			case TokenType.OperationStart:
 				if((expStage >= 2) && (currBranch.type)) {
-					currBranch.operation = [];
-					console.log(JSON.stringify(parseOperationTokens(tokens.slice(i+1)), null, 4));
+					currBranch.operation = parseOperationTokens(tokens.slice(i+1));
+					i+=currBranch.operation.length-2;
+					console.log('OPERATION ', tokens);
 					expStage++;
 				}
 				else handleError('invalid operation start token', line+1, -1);
@@ -115,7 +116,10 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 		switch(token.type) {
 
 			case TokenType.OperationStart:
-				operationTree.push(parseOperationTokens(tokens.slice(i+1)));
+				const nestedOperation = parseOperationTokens(tokens.slice(i+1));
+				console.log(nestedOperation);
+				operationTree.push(nestedOperation);
+				i+=nestedOperation.length-2;
 				break;
 			
 			case TokenType.OperationEnd:
