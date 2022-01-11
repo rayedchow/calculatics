@@ -1,4 +1,4 @@
-import { Operator, OPERATORS, SyntaxBranch } from "../../@types/SyntaxTree";
+import { OperationTree, Operator, OPERATORS, SyntaxBranch } from "../../@types/SyntaxTree";
 import { Token, TokenType } from "../../@types/Token";
 import { handleError } from "../errorHandler";
 
@@ -98,4 +98,31 @@ export const parse = (tokens: Token[]) => {
 	}
 
 	return syntaxTree;
+}
+
+const parseOperationTokens = (tokens: Token[]): OperationTree => {
+
+	const operationTree: OperationTree = [];
+
+	for(let i = 0; i < tokens.length; i++) {
+		const token = tokens[i];
+
+		// switch(token.type) {
+
+		// 	case TokenType.
+
+		// 	default:
+		// 		break;
+		// }
+
+		if(token.type === TokenType.OperationStart)
+			operationTree.push(parseOperationTokens(tokens.slice(i)));
+		
+		if(token.type === TokenType.OperationEnd)
+			return operationTree;
+		
+		if(token.type)
+	}
+
+	return handleError('unfinished operation tree; no EOO', -1, -1);
 }
