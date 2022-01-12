@@ -73,7 +73,7 @@ export const parse = (tokens: Token[]) => {
 						const nestedOperation = parseOperationTokens(tokens.slice(i+1));
 						currBranch.operation.push(nestedOperation);
 						i+=nestedOperation.length+1;
-						console.log(tokens[i], tokens[i+1]);
+						console.log(tokens.slice(i-2));
 					} else currBranch.operation = [];
 					expStage++;
 				}
