@@ -71,7 +71,8 @@ export const parse = (tokens: Token[]) => {
 				if((expStage >= 2) && (currBranch.type)) {
 					if(currBranch.operation) {
 						currBranch.operation.push(parseOperationTokens(tokens.slice(i+1)));
-						i+=currBranch.operation.length;
+						i+=currBranch.operation.length-1;
+						// console.log(currBranch.operation);
 					} else currBranch.operation = [];
 					expStage++;
 				}

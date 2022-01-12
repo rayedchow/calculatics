@@ -90,6 +90,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 }
 
 const evalOperation = (priorityTree: OperationTree, line: number): number => {
+	// console.log(priorityTree);
 
 	if(typeof priorityTree[0] === 'string')
 		return handleError('invalid number in operation tree', line, -1);
@@ -164,6 +165,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 export const parseOperationTree = (operationTree: OperationTree, line: number): number => {
 
 	const priorityTree = priorityOperation(operationTree);
+	console.log(priorityTree);
 	const evaluatedResult = evalOperation(priorityTree, line);
 
 	return evaluatedResult;
