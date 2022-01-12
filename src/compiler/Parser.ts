@@ -72,9 +72,7 @@ export const parse = (tokens: Token[]) => {
 					if(currBranch.operation) {
 						const nestedOperation = parseOperationTokens(tokens.slice(i+1));
 						currBranch.operation.push(nestedOperation.tree);
-						console.log(tokens[tokens.indexOf(nestedOperation.lastToken)+1], tokens[tokens.indexOf(nestedOperation.lastToken)+2]);
 						i=tokens.indexOf(nestedOperation.lastToken);
-						// console.log(tokens[i+1], tokens.slice(i-1));
 					} else currBranch.operation = [];
 					expStage++;
 				}
@@ -84,7 +82,6 @@ export const parse = (tokens: Token[]) => {
 			case TokenType.OperationEnd:
 				if((expStage >=3) && (currBranch.type) && (currBranch.operation)) expStage++;
 				else handleError('invalid operation end token', line+1, -1);
-				// console.log(currBranch.operation);
 				break;
 			
 			case TokenType.Operator:
