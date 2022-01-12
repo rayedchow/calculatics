@@ -73,7 +73,8 @@ export const parse = (tokens: Token[]) => {
 						const nestedOperation = parseOperationTokens(tokens.slice(i+1));
 						currBranch.operation.push(nestedOperation);
 						i+=nestedOperation.length+1;
-						console.log(tokens.slice(i-2));
+						if(tokens[i+1].text === ')') i++;
+						// console.log(tokens[i+1], tokens.slice(i-1));
 					} else currBranch.operation = [];
 					expStage++;
 				}
@@ -123,6 +124,8 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 				const nestedOperation = parseOperationTokens(tokens.slice(i+1));
 				operationTree.push(nestedOperation);
 				i+=nestedOperation.length+1;
+				if(tokens[i+1].text === ')') i++;
+				console.log(tokens[i+1], tokens);
 				break;
 			
 			case TokenType.OperationEnd:
