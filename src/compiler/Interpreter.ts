@@ -165,7 +165,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 export const parseOperationTree = (operationTree: OperationTree, line: number): number => {
 
 	const priorityTree = priorityOperation(operationTree);
-	// console.log(operationTree);
+	console.log(operationTree);
 	const evaluatedResult = evalOperation(priorityTree, line);
 
 	return evaluatedResult;

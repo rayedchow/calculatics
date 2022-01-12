@@ -71,9 +71,9 @@ export const parse = (tokens: Token[]) => {
 				if((expStage >= 2) && (currBranch.type)) {
 					if(currBranch.operation) {
 						const nestedOperation = parseOperationTokens(tokens.slice(i+1));
-						currBranch.operation.push(nestedOperation);
-						i+=nestedOperation.length+1;
-						if(tokens[i+1].text === ')') i++;
+						currBranch.operation.push(nestedOperation.tree);
+						console.log(tokens[tokens.indexOf(nestedOperation.lastToken)+1], tokens[tokens.indexOf(nestedOperation.lastToken)+2]);
+						i=tokens.indexOf(nestedOperation.lastToken);
 						// console.log(tokens[i+1], tokens.slice(i-1));
 					} else currBranch.operation = [];
 					expStage++;
@@ -111,9 +111,10 @@ export const parse = (tokens: Token[]) => {
 	return syntaxTree;
 }
 
-const parseOperationTokens = (tokens: Token[]): OperationTree => {
+const parseOperationTokens = (tokens: Token[]): { tree: OperationTree, lastToken: Token } => {
 
 	const operationTree: OperationTree = [];
+	let lastToken: Token;
 
 	for(let i = 0; i < tokens.length; i++) {
 		const token = tokens[i];
@@ -122,24 +123,30 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 
 			case TokenType.OperationStart:
 				const nestedOperation = parseOperationTokens(tokens.slice(i+1));
-				operationTree.push(nestedOperation);
-				i+=nestedOperation.length+1;
-				if(tokens[i+1].text === ')') i++;
-				console.log(tokens[i+1], tokens);
+				operationTree.push(nestedOperation.tree);
+				i=tokens.indexOf(nestedOperation.lastToken);
+				lastToken = nestedOperation.lastToken;
 				break;
 			
 			case TokenType.OperationEnd:
-				return operationTree;
+				lastToken = token;
+				return {
+					tree: operationTree,
+					lastToken
+				};
 			
 			case TokenType.Number:
+				lastToken = token;
 				operationTree.push(Number(token.text));
 				break;
 			
 			case TokenType.Identifier:
+				lastToken = token;
 				operationTree.push({ identifier: token.text });
 				break;
 			
 			case TokenType.Operator:
+				lastToken = token;
 				operationTree.push(token.text as Operator);
 				break;
 
