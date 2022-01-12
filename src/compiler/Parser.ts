@@ -120,7 +120,7 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 
 			case TokenType.OperationStart:
 				const nestedOperation = parseOperationTokens(tokens.slice(i+1));
-				console.log(tokens.slice(i+1));
+				// console.log(tokens.slice(i+1));
 				operationTree.push(nestedOperation);
 				i+=nestedOperation.length-2;
 				break;
@@ -138,6 +138,7 @@ const parseOperationTokens = (tokens: Token[]): OperationTree => {
 			
 			case TokenType.Operator:
 				operationTree.push(token.text as Operator);
+				console.log(operationTree);
 				break;
 
 			default:
