@@ -40,7 +40,7 @@ export const lex = (charSequence: string[]) => {
 				pos: pos-identifierToken.length
 			};
 			tokens.push(lastToken);
-			identifierToken = '';
+			// identifierToken = '';
 			currToken = '';
 		}
 
@@ -144,6 +144,7 @@ export const lex = (charSequence: string[]) => {
 	}
 
 	if((currToken !== '') || (numToken !== '')) {
+		console.log(tokens);
 		console.log(currToken, numToken);
 		handleError('invalid EOF expression', line+1, linePos+1);
 	}
