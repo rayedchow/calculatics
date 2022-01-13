@@ -50,6 +50,7 @@ export const lex = (charSequence: string[]) => {
 			(currToken === 'var')
 		) {
 			if((lastToken) && (lastToken.type !== TokenType.EOL)) {
+				console.log(tokens, lastToken);
 				handleError('invalid statement token', line+1, linePos+1);
 			}
 			lastToken = {
@@ -144,10 +145,10 @@ export const lex = (charSequence: string[]) => {
 	}
 
 	if((currToken !== '') || (numToken !== '')) {
-		console.log(tokens);
 		console.log(currToken, numToken);
 		handleError('invalid EOF expression', line+1, linePos+1);
 	}
+	console.log(tokens);
 
 	return tokens;
 
