@@ -1,5 +1,6 @@
 var->hai = 3;
-ret->2hai;
+var->helo = 1038;
+ret->(hai*helo);
 
 # -> VARIABLE DECLARING <- [x]
 # var->hello=65;
