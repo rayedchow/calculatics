@@ -90,12 +90,10 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 }
 
 const evalOperation = (priorityTree: OperationTree, line: number): number => {
-	// console.log(priorityTree);
 
 	if(typeof priorityTree[0] === 'string')
 		return handleError('invalid number in operation tree', line, -1);
 	
-	// console.log(priorityTree);
 	let firstOperation = priorityTree[0];
 	let currNum: number;
 	if(typeof firstOperation === 'object') {
