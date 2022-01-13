@@ -1,4 +1,4 @@
-ret->(abs(-5)+1);
+ret->(3+(5+2)+3*(25/1*6)-4);
 
 # -> VARIABLE DECLARING <- [x]
 # var->hello=65;
