@@ -69,11 +69,14 @@ export const parse = (tokens: Token[]) => {
 			
 			case TokenType.OperationStart:
 				if((expStage >= 2) && (currBranch.type)) {
-					if(currBranch.operation) {
-						const nestedOperation = parseOperationTokens(tokens.slice(i+1));
-						currBranch.operation.push(nestedOperation.tree);
-						i=tokens.indexOf(nestedOperation.lastToken);
-					} else currBranch.operation = [];
+					// if(currBranch.operation) {
+					// 	const nestedOperation = parseOperationTokens(tokens.slice(i+1));
+					// 	currBranch.operation.push(nestedOperation.tree);
+					// 	i=tokens.indexOf(nestedOperation.lastToken);
+					// } else currBranch.operation = [];
+					const nestedOperation = parseOperationTokens(tokens.slice(i+1));
+					currBranch.operation = nestedOperation.tree;
+					i=tokens.indexOf(nestedOperation.lastToken);
 					expStage++;
 				}
 				else handleError('invalid operation start token', line+1, -1);
