@@ -39,6 +39,7 @@ export const lex = (charSequence: string[]) => {
 				text: identifierToken,
 				pos: pos-identifierToken.length
 			};
+			console.log(identifierToken);
 			tokens.push(lastToken);
 			identifierToken = '';
 		}
