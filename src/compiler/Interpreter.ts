@@ -43,7 +43,7 @@ const log = (branch: SyntaxBranch) => {
 		if(!identifierScope.global[branch.identifier]) handleError('invalid log identifier use', branch.line, -1);
 		console.log(identifierScope.global[branch.identifier].value);
 	} else if(branch.operation)
-		console.log(parseOperationTree(branch.operation, branch.line) + 's');
+		console.log(parseOperationTree(branch.operation, branch.line));
 	else handleError('unknown log value', branch.line, -1);
 }
 
