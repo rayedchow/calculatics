@@ -57,7 +57,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 		if((typeof operation === 'object') && (Array.isArray(operation)))
 			operation = priorityOperation(operation);
 
-		if(['*','/'].includes(operation as Operator)) {
+		if(['*','/','^'].includes(operation as Operator)) {
 			if(!nested) {
 
 				operationPriority.pop();
@@ -163,6 +163,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 export const parseOperationTree = (operationTree: OperationTree, line: number): number => {
 
 	const priorityTree = priorityOperation(operationTree);
+	console.log(priorityTree);
 	const evaluatedResult = evalOperation(priorityTree, line);
 
 	return evaluatedResult;
