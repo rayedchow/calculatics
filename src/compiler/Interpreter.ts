@@ -67,20 +67,21 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 				);
 				operationPriority.push(nestedOperation);
 				i+=nestedOperation.length-2;
+				console.log(operationPriority);
 				continue;
 
 			} else if((nested) && (!nestOperator)) {
 
-				if(operation === '^') {
-					operationPriority.pop();
-					const nestedOperation = priorityOperation(
-						operationTree.slice(i-1),
-						true
-					);
-					operationPriority.push(nestedOperation);
-					i+=nestedOperation.length-2;
-					continue;
-				}
+				// if(operation === '^') {
+				// 	operationPriority.pop();
+				// 	const nestedOperation = priorityOperation(
+				// 		operationTree.slice(i-1),
+				// 		true
+				// 	);
+				// 	operationPriority.push(nestedOperation);
+				// 	i+=nestedOperation.length-2;
+				// 	continue;
+				// }
 
 				// updates nested sequence
 				operationPriority.push(operation, operationTree[i+1]);
