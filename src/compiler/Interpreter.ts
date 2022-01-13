@@ -58,7 +58,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 			operation = priorityOperation(operation);
 
 		if(['*','/','^'].includes(operation as Operator)) {
-			if((!nested) || (operation === '^')) {
+			if(!nested) {
 
 				operationPriority.pop();
 				const nestedOperation = priorityOperation(
@@ -70,6 +70,17 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 				continue;
 
 			} else if((nested) && (!nestOperator)) {
+
+				if(operation === '^') {
+					operationPriority.pop();
+					const nestedOperation = priorityOperation(
+						operationTree.slice(i-1),
+						true
+					);
+					operationPriority.push(nestedOperation);
+					i+=nestedOperation.length-2;
+					continue;
+				}
 
 				// updates nested sequence
 				operationPriority.push(operation, operationTree[i+1]);
