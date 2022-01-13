@@ -41,6 +41,10 @@ const log = (branch: SyntaxBranch) => {
 	if(branch.value) console.log(branch.value);
 	else if(branch.identifier) {
 		if(!identifierScope.global[branch.identifier]) handleError('invalid log identifier use', branch.line, -1);
+		if(branch.value) {
+			console.log((identifierScope.global[branch.identifier].value*branch.value));
+			return;
+		}
 		console.log(identifierScope.global[branch.identifier].value);
 	} else if(branch.operation)
 		console.log(parseOperationTree(branch.operation, branch.line));
