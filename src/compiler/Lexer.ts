@@ -41,6 +41,7 @@ export const lex = (charSequence: string[]) => {
 			};
 			tokens.push(lastToken);
 			identifierToken = '';
+			currToken = '';
 		}
 
 		if(
