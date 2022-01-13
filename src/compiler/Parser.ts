@@ -69,12 +69,7 @@ export const parse = (tokens: Token[]) => {
 			
 			case TokenType.OperationStart:
 				if((expStage >= 2) && (currBranch.type)) {
-					// if(currBranch.operation) {
-					// 	const nestedOperation = parseOperationTokens(tokens.slice(i+1));
-					// 	currBranch.operation.push(nestedOperation.tree);
-					// 	i=tokens.indexOf(nestedOperation.lastToken);
-					// } else currBranch.operation = [];
-					const nestedOperation = parseOperationTokens(tokens.slice(i+1));
+					const nestedOperation = parseOperationTokens(tokens.slice(i+1), line);
 					currBranch.operation = nestedOperation.tree;
 					i=tokens.indexOf(nestedOperation.lastToken);
 					expStage++;
@@ -89,11 +84,11 @@ export const parse = (tokens: Token[]) => {
 					currBranch = {};
 					expStage = 0;
 				}
-				else handleError('invalid EOL token', line, -1);
+				else handleError('invalid EOL token', line+1, -1);
 				break;
 
 			default:
-				handleError('invalid operation in parser', line, -1);
+				handleError('invalid operation in parser', line+1, -1);
 				break;
 		}
 
@@ -102,7 +97,7 @@ export const parse = (tokens: Token[]) => {
 	return syntaxTree;
 }
 
-const parseOperationTokens = (tokens: Token[]): { tree: OperationTree, lastToken: Token } => {
+const parseOperationTokens = (tokens: Token[], line: number): { tree: OperationTree, lastToken: Token } => {
 
 	const operationTree: OperationTree = [];
 	let lastToken: Token;
@@ -113,7 +108,7 @@ const parseOperationTokens = (tokens: Token[]): { tree: OperationTree, lastToken
 		switch(token.type) {
 
 			case TokenType.OperationStart:
-				const nestedOperation = parseOperationTokens(tokens.slice(i+1));
+				const nestedOperation = parseOperationTokens(tokens.slice(i+1), line);
 				operationTree.push(nestedOperation.tree);
 				i=tokens.indexOf(nestedOperation.lastToken);
 				lastToken = nestedOperation.lastToken;
@@ -142,6 +137,7 @@ const parseOperationTokens = (tokens: Token[]): { tree: OperationTree, lastToken
 				break;
 
 			default:
+				handleError('invalid operation in parser', line+1, -1);
 				break;
 		}
 	}
