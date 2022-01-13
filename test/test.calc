@@ -1,4 +1,5 @@
-ret->(3+(5+2)+3*(25/1*6)-4);
+var->hai = 3;
+ret->2hai;
 
 # -> VARIABLE DECLARING <- [x]
 # var->hello=65;
