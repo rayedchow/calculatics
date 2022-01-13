@@ -34,7 +34,8 @@ export const OPERATORS = [
 	'+',
 	'-',
 	'*',
-	'/'
+	'/',
+	'^'
 ] as const;
 
 // example syntax tree:
