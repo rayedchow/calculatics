@@ -1,10 +1,12 @@
 // PRODUCTION CODE:
 import { handleArgs } from "./argHandler";
+import { performance } from "perf_hooks";
 
 const CLI_ARGS = process.argv.slice(2);
-const timer = new Date().getTime();
+const timer = performance.now();
 handleArgs(CLI_ARGS);
-console.log((new Date().getTime())-timer);
+const compileTime = performance.now()-timer;
+console.log(`${Math.round(compileTime*1000)/1000}ms`);
 
 // TESTING CODE:
 // - uses testing library to perform
