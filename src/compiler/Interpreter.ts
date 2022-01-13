@@ -67,7 +67,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 				);
 				operationPriority.push(nestedOperation);
 				i+=nestedOperation.length-2;
-				console.log(operationPriority);
+				// console.log(operationPriority);
 				continue;
 
 			} else if((nested) && (!nestOperator)) {
@@ -98,6 +98,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 	}
 
+	console.log(operationPriority);
 	return operationPriority;
 }
 
@@ -175,7 +176,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 export const parseOperationTree = (operationTree: OperationTree, line: number): number => {
 
 	const priorityTree = priorityOperation(operationTree);
-	console.log(priorityTree);
+	// console.log(priorityTree);
 	const evaluatedResult = evalOperation(priorityTree, line);
 
 	return evaluatedResult;
