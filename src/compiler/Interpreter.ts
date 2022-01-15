@@ -54,10 +54,8 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 	for(let i = 0; i < operationTree.length; i++) {
 		let operation = operationTree[i];
 
-		if((typeof operation === 'object') && (Array.isArray(operation))) {
+		if((typeof operation === 'object') && (Array.isArray(operation)))
 			operation = priorityOperation(operation);
-			console.log('hello');
-		}
 
 		if(['*','/','^'].includes(operation as Operator)) {
 			if(!nested) {
@@ -69,7 +67,6 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 				);
 				operationPriority.push(nestedOperation);
 				i+=nestedOperation.length-2;
-				// console.log(operationPriority);
 				continue;
 
 			} else if((nested) && (!nestOperator)) {
@@ -82,7 +79,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 						operationTree[i+1]
 					];
 					operationPriority.push(nestedOperation);
-					i++;
+					i+=2;
 					continue;
 				}
 
@@ -101,7 +98,6 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 	}
 
-	// console.log(operationPriority);
 	return operationPriority;
 }
 
@@ -179,7 +175,6 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 export const parseOperationTree = (operationTree: OperationTree, line: number): number => {
 
 	const priorityTree = priorityOperation(operationTree);
-	// console.log(priorityTree);
 	const evaluatedResult = evalOperation(priorityTree, line);
 
 	return evaluatedResult;
