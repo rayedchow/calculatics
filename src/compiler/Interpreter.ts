@@ -47,15 +47,18 @@ const log = (branch: SyntaxBranch) => {
 	else handleError('unknown log value', branch.line, -1);
 }
 
-const priorityOperation = (operationTree: OperationTree, nested: boolean = false): OperationTree => {
+const priorityOperation = (operationTree: OperationTree, nested: boolean = false): { tree: OperationTree, items: number } => {
 	let operationPriority: OperationTree = [];
 	let nestOperator = true;
+	let items = 0;
 
 	for(let i = 0; i < operationTree.length; i++) {
 		let operation = operationTree[i];
 
-		if((typeof operation === 'object') && (Array.isArray(operation)))
-			operation = priorityOperation(operation);
+		if((typeof operation === 'object') && (Array.isArray(operation))) {
+			operation = priorityOperation(operation).tree;
+			items++;
+		}
 
 		if(['*','/'].includes(operation as Operator)) {
 			if(!nested) {
@@ -65,8 +68,9 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 					operationTree.slice(i-1), // getting rest of operation tree
 					true
 				);
-				operationPriority.push(nestedOperation);
-				i+=nestedOperation.length-2;
+				operationPriority.push(nestedOperation.tree);
+				i+=nestedOperation.items+1;
+				items+=nestedOperation.items;
 				console.log(operationPriority, operationTree[i+1]);
 				continue;
 
@@ -80,7 +84,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 			}
 			if(nestOperator) nestOperator = false;
 		} if((['+','-'].includes(operation as Operator)) && (nested)) {
-			return operationPriority;
+			return { tree: operationPriority, items };
 		} if((operation as Operator) === '^') {
 			operationPriority.pop();
 			const nestedOperation = [
@@ -92,6 +96,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 			console.log('NESTED', nestedOperation);
 			operationPriority.push(nestedOperation);
 			i++;
+			items++;
 			continue;
 		}
 
@@ -99,7 +104,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 	}
 
-	return operationPriority;
+	return { tree: operationPriority, items };
 }
 
 const evalOperation = (priorityTree: OperationTree, line: number): number => {
@@ -176,7 +181,7 @@ const evalOperation = (priorityTree: OperationTree, line: number): number => {
 export const parseOperationTree = (operationTree: OperationTree, line: number): number => {
 
 	const priorityTree = priorityOperation(operationTree);
-	const evaluatedResult = evalOperation(priorityTree, line);
+	const evaluatedResult = evalOperation(priorityTree.tree, line);
 
 	return evaluatedResult;
 }
