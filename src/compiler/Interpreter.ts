@@ -81,7 +81,14 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 		} if((['+','-'].includes(operation as Operator)) && (nested)) {
 			return operationPriority;
 		} if((operation as Operator) === '^') {
-			
+			operationPriority.pop();
+			const nestedOperation = priorityOperation(
+				operationTree.slice(i-1),
+				true
+			);
+			operationPriority.push(nestedOperation);
+			i+=nestedOperation.length-2;
+			continue;
 		}
 
 		operationPriority.push(operation);
