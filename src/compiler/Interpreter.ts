@@ -69,7 +69,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 					true
 				);
 				operationPriority.push(nestedOperation.tree);
-				i+=nestedOperation.items+2;
+				i+=nestedOperation.items+1;
 				items++;
 				continue;
 
