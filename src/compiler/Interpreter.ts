@@ -95,6 +95,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 	}
 
+	console.log(operationPriority);
 	return operationPriority;
 }
 
