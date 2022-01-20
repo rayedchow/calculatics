@@ -67,6 +67,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 				);
 				operationPriority.push(nestedOperation);
 				i+=nestedOperation.length-2;
+				console.log(operationPriority, operationTree[i+1]);
 				continue;
 
 			} else if((nested) && (!nestOperator)) {
@@ -90,7 +91,7 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 			// const nestedOperation = [];
 			console.log('NESTED', nestedOperation);
 			operationPriority.push(nestedOperation);
-			i+=nestedOperation.length-2;
+			i++;
 			continue;
 		}
 
@@ -98,7 +99,6 @@ const priorityOperation = (operationTree: OperationTree, nested: boolean = false
 
 	}
 
-	console.log(operationPriority);
 	return operationPriority;
 }
 
